@@ -1,23 +1,30 @@
 <div class="login">
   <h2>Login Form</h2>
-  <form action="">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <div class="imgcontainer">
       <img [src]="avatar" alt="Avatar" class="avatar" />
     </div>
 
     <div class="container">
       <label for="email"><b>Username</b></label>
-      <input type="email" placeholder="Enter Email" name="email" required />
+      <input
+        type="email"
+        placeholder="Enter Email"
+        formControlName="email"
+        required
+      />
 
       <label for="password"><b>Password</b></label>
       <input
         type="password"
         placeholder="Enter Password"
-        name="password"
+        formControlName="password"
         required
       />
 
-      <button type="submit">Login</button>
+      <button type="submit" [disabled]="!loginForm.valid" class="submit">
+        Login
+      </button>
     </div>
 
     <!-- <div class="container" style="background-color:#f1f1f1">
