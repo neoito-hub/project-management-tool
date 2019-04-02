@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
+import { ReactiveFormsModule } from '@angular/forms';
 import { firebaseConfig } from './shared/firebase.config';
 
 @NgModule({
@@ -19,6 +20,7 @@ import { firebaseConfig } from './shared/firebase.config';
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,
     AngularFireAuthModule,
+    ReactiveFormsModule,
     AngularFireStorageModule
   ],
   providers: [],
