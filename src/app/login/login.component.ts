@@ -7,7 +7,7 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  private avatar = require('../shared/images/img_avatar2.png');
+  avatar = 'assets/images/img_avatar2.png';
   loginForm = this.fb.group({
     email: ['', Validators.required],
     password: ['', Validators.required]
