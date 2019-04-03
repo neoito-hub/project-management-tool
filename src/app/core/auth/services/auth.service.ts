@@ -9,22 +9,10 @@ import { User as FireUser } from 'firebase';
 
 @Injectable()
 export class AuthService {
-  success = {
-    err: false,
-    message: 'Logged in successfully'
-  };
-  error = {
-    err: true,
-    message: 'Login failed. Check Username and Password'
-  };
   user: User;
   fireUser: FireUser;
 
   constructor(public afAuth: AngularFireAuth, public router: Router) {
-    this.user = {
-      email: 'lukku@gmail.com',
-      password: 'password'
-    };
     this.afAuth.authState.subscribe(user => {
       if (user) {
         this.fireUser = user;
@@ -43,14 +31,12 @@ export class AuthService {
       this.afAuth.auth.signInWithEmailAndPassword(email, password)
     );
     console.log(`Firebase response: ${result}`);
-    //this.router.navigate(['admin/list']);
     return result;
   }
   //logout service
   logout(payload: User): Observable<void> {
     var result = from(this.afAuth.auth.signOut());
     console.log(`Firebase response: ${result}`);
-    //this.router.navigate(['admin/list']);
     return result;
   }
 }
