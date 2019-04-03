@@ -7,21 +7,23 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { LoginComponent } from './login/login.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { AuthModule } from './modules/auth/auth.module';
+import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { firebaseConfig } from './shared/firebase.config';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
-  declarations: [AppComponent, DashboardComponent, LoginComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,
     AngularFireAuthModule,
-    ReactiveFormsModule,
-    AngularFireStorageModule
+    AuthModule,
+    DashboardModule,
+    AngularFireStorageModule,
+    CoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]
