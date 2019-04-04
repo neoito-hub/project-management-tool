@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { auth } from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { User as FireUser } from 'firebase';
+import { map, catchError } from 'rxjs/operators';
 
 @Injectable()
 export class AuthService {
@@ -21,6 +22,25 @@ export class AuthService {
         localStorage.setItem('user', null);
       }
     });
+  }
+
+  //login status
+  public isAuthenticated(): Observable<any> {
+    return this.afAuth.authState.pipe(
+      map(user => {
+        if (user) {
+          this.fireUser = user;
+          localStorage.setItem('user', JSON.stringify(this.fireUser));
+          console.log('User is authenticated'); //for debug
+          return user;
+        } else {
+          localStorage.setItem('user', null);
+          console.log('User is not authenticated'); //for debug
+          return null;
+        }
+      }),
+      catchError(err => of(false))
+    );
   }
 
   //login service with email and password
