@@ -11,9 +11,8 @@ import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { firebaseConfig } from './shared/firebase.config';
 import { CoreModule } from './core/core.module';
 import { AuthGuardService } from './core/auth/services/auth-guard.service';
+import { ResourcesModule } from './modules/Resources/resources.module';
 import { ProjectModule } from './modules/project/project.module';
-import { ProjectService } from './core/project/services/project.service';
-import { AngularFireDatabase } from '@angular/fire/database';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,11 +23,12 @@ import { AngularFireDatabase } from '@angular/fire/database';
     AngularFirestoreModule,
     AngularFireAuthModule,
     DashboardModule,
-    AuthModule,
     ProjectModule,
+    ResourcesModule,
+    AuthModule,
     CoreModule
   ],
-  providers: [AuthGuardService, ProjectService, AngularFireDatabase],
+  providers: [AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

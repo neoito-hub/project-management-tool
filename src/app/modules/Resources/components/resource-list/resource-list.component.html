@@ -1,0 +1,20 @@
+<table>
+  <tr>
+    <th>bitbucket</th>
+    <th>email</th>
+    <th>experience</th>
+    <th>github</th>
+    <th>gitlab</th>
+    <th>name</th>
+    <th>upwork</th>
+  </tr>
+  <tr *ngFor="let resource of resources">
+    <td>{{ resource?.bitbucket }}</td>
+    <td>{{ resource?.email }}</td>
+    <td>{{ resource?.experience }}</td>
+    <td>{{ resource?.github }}</td>
+    <td>{{ resource?.gitlab }}</td>
+    <td>{{ resource?.name }}</td>
+    <td>{{ resource?.upwork }}</td>
+  </tr>
+</table>
