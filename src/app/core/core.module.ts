@@ -7,17 +7,19 @@ import { reducers } from './root-reducer/index';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthService } from './auth/services/auth.service';
 import { AuthEffects } from './auth/effects/auth.effects';
+import { ResourceEffect } from './resource/effects/resource.effect';
+import { ResourceService } from './resource/services';
 
 @NgModule({
   imports: [
     CommonModule,
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([AuthEffects]),
+    EffectsModule.forRoot([AuthEffects, ResourceEffect]),
     StoreDevtoolsModule.instrument({
       maxAge: 5
     })
   ],
   declarations: [],
-  providers: [AuthService]
+  providers: [AuthService, ResourceService]
 })
 export class CoreModule {}

@@ -12,6 +12,7 @@ import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { firebaseConfig } from './shared/firebase.config';
 import { CoreModule } from './core/core.module';
 import { AuthGuardService } from './core/auth/services/auth-guard.service';
+import { ResourcesModule } from './modules/Resources/resources.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,7 +23,7 @@ import { AuthGuardService } from './core/auth/services/auth-guard.service';
     AngularFirestoreModule,
     AngularFireAuthModule,
     DashboardModule,
-
+    ResourcesModule,
     AuthModule,
     AngularFireStorageModule,
     CoreModule
