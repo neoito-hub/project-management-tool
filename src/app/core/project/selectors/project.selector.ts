@@ -1,17 +1,19 @@
-// ngrx
-import { createSelector } from '@ngrx/store';
-import { createFeatureSelector } from '@ngrx/store';
+import { createSelector, createFeatureSelector } from '@ngrx/store';
+import * as fromReducer from '../reducers/project.reducer';
+import { ProjectState } from '../reducers/project.reducer';
 
-// app
-import { ProjectReducer, ProjectState } from '../reducers/project.reducer';
-
-export const getProjectFeatureState = createFeatureSelector<ProjectState>(
-  'auth'
+export const getProjectState = createFeatureSelector<fromReducer.ProjectState>(
+  'project'
 );
 
-export const getCategoryAndResources = createSelector(
-  getProjectFeatureState,
-  state => {
-    return state.projectList;
+export const getAllProjects = createSelector(
+  getProjectState,
+  fromReducer.getProjects
+);
+
+export const getAllProjectsLoading = createSelector(
+  getProjectState,
+  (state: ProjectState) => {
+    return state.isLoading;
   }
 );

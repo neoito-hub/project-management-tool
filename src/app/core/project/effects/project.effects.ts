@@ -13,16 +13,16 @@ import { Router } from '@angular/router';
 export class ProjectEffects {
   constructor(
     private actions: Actions,
-    private fromAuthServices: fromProjectServices.ProjectService,
+    private fromProjectServices: fromProjectServices.ProjectService,
     private router: Router
   ) {}
 
   //List Project Effects
   @Effect()
-  login$ = this.actions.pipe(
+  loadProjects$ = this.actions.pipe(
     ofType(fromProjectActions.LOAD_PROJECT),
     switchMap((action: fromProjectActions.LoadProjectAction) => {
-      return this.fromAuthServices.loadProjects(action.payload).pipe(
+      return this.fromProjectServices.loadProjects().pipe(
         map(data => {
           console.log(data);
           //this.router.navigate(['dashboard']);

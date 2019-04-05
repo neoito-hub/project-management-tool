@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-list-project',
@@ -6,7 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./list-project.component.scss']
 })
 export class ListProjectComponent implements OnInit {
+  @Input()
+  projects: any;
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log('from list ' + JSON.stringify(this.projects));
+  }
 }

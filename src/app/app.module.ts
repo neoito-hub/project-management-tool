@@ -13,6 +13,7 @@ import { CoreModule } from './core/core.module';
 import { AuthGuardService } from './core/auth/services/auth-guard.service';
 import { ResourcesModule } from './modules/Resources/resources.module';
 import { ProjectModule } from './modules/project/project.module';
+import { AngularFireDatabase } from '@angular/fire/database';
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,7 +29,7 @@ import { ProjectModule } from './modules/project/project.module';
     AuthModule,
     CoreModule
   ],
-  providers: [AuthGuardService],
+  providers: [AuthGuardService, AngularFireDatabase],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
