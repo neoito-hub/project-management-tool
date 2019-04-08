@@ -1,3 +1,16 @@
-<p>
-  list-project works!
-</p>
+<table>
+  <tr>
+    <th>Project Name</th>
+    <th>Description</th>
+    <th>client</th>
+    <th>Email</th>
+    <th>Start Date</th>
+  </tr>
+  <tr *ngFor="let project of projects">
+    <td>{{ project?.projectName }}</td>
+    <td>{{ project?.description }}</td>
+    <td>{{ project?.clientName }}</td>
+    <td>{{ project?.email }}</td>
+    <td>{{ project?.startDate.seconds * 1000 | date }}</td>
+  </tr>
+</table>

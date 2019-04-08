@@ -24,7 +24,7 @@ export const DOCUMENT_UPLOAD_ERROR = '[PROJECT] DOCUMENT_UPLOAD_ERROR';
 // Load Project
 export class LoadProjectAction implements Action {
   readonly type = LOAD_PROJECT;
-  constructor(public payload: any) {}
+  constructor(public payload?: any) {}
 }
 export class LoadProjectActionSuccess implements Action {
   readonly type = LOAD_PROJECT_SUCCESS;

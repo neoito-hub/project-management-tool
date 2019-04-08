@@ -19,7 +19,7 @@ export class ProjectService {
     public router: Router,
     public afDatabase: AngularFireDatabase
   ) {}
-  loadProjects(payload: String): Observable<any> {
+  loadProjects(): Observable<any> {
     return this.afStore
       .collection('/projects', ref => {
         console.log(`Firebase response: ${ref}`);

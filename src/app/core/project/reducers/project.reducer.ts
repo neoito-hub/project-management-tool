@@ -22,14 +22,17 @@ export function ProjectReducer(
   // State interface
   switch (action.type) {
     case fromProjectActions.LOAD_PROJECT: {
+      console.log(`inside load acton`);
       return {
         ...state,
         isLoading: true
       };
     }
     case fromProjectActions.LOAD_PROJECT_SUCCESS: {
+      console.log(`inside load acton success`);
       return {
         ...state,
+        projectList: action.payload,
         isLoading: false
       };
     }
@@ -98,5 +101,7 @@ export function ProjectReducer(
       };
     }
   }
-  // return state;
 }
+export const getProjects = (state: ProjectState) => state.projectList;
+export const getProjectsIsLoading = (state: ProjectState) => state.isLoading;
+export const getProjectsError = (state: ProjectState) => state.error;
