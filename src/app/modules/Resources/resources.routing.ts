@@ -5,7 +5,7 @@ import { ResourceListContainerComponent } from './containers/resource-list/resou
 import { ResourceAddContainerComponent } from './containers/resource-add/resource-add.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'resource-list', pathMatch: 'full' },
+  // { path: '', redirectTo: 'resource-list', pathMatch: 'full' },
   {
     path: 'resource-list',
     component: ResourceListContainerComponent,

@@ -1,1 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
+.plus-button {
+  width: 30px;
+  margin-top: -9px;
+}
+.btn-fab {
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  background: blue;
+  right: 16px;
+  bottom: 16px;
+  position: fixed;
+  margin-right: 0;
+  margin-bottom: 0;
+  padding: 0;
+  border: none;
+  outline: none !important;
+  color: white;
+  font-size: 24px;
+  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16),
+    0 3px 6px rgba(0, 0, 0, 0.23);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  cursor: pointer;
+  line-height: 2.7;
+}

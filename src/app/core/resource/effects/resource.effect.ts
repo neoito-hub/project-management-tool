@@ -28,12 +28,31 @@ export class ResourceEffect {
     switchMap((action: fromActions.LoadResourceAction) => {
       return this._resourceService.getResourceList().pipe(
         map(data => {
-          console.log(data);
           return new fromActions.LoadResourceActionSuccess(data);
         }),
         catchError(error => {
           console.log(error);
           return of(new fromActions.LoadResourceActionError());
+        })
+      );
+    })
+  );
+
+  @Effect()
+  addResource$ = this.actions.pipe(
+    ofType(fromActions.ADD_RESOURCE),
+    switchMap((action: fromActions.AddResourceAction) => {
+      return this._resourceService.addResource(action.payload).pipe(
+        map(data => {
+          console.log('data in add effect', data);
+          return new fromActions.AddResourceActionSuccess(data);
+        }),
+        tap(() => {
+          this.router.navigate(['/resource-list']);
+        }),
+        catchError(error => {
+          console.log(error);
+          return of(new fromActions.AddResourceActionError());
         })
       );
     })

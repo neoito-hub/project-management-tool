@@ -24,6 +24,7 @@ export function reducer(
       };
     }
 
+    case fromActions.ADD_RESOURCE_ERROR:
     case fromActions.LOAD_RESOURCE_ERROR: {
       return {
         ...state,
