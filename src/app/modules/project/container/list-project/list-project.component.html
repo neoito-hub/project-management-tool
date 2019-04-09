@@ -1,1 +1,8 @@
 <app-list-project [projects]="data$ | async"></app-list-project>
+<div class="fixed-bottom">
+  <button class="btn-fab" [routerLink]="['/projects/add']">
+    <!-- <i class="fa fa-plus" aria-hidden="true"></i> -->
+
+    <img class="plus-button " src="assets/images/ic_add_white_18dp_1x.png" />
+  </button>
+</div>

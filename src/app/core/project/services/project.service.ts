@@ -28,4 +28,19 @@ export class ProjectService {
       .valueChanges();
     // console.log(`Firebase response: ${result}`);
   }
+  addProject(payload: any): any {
+    return from(
+      this.afStore
+        .collection('projects')
+        .add(payload)
+        .then(
+          function(result: any) {
+            return result;
+          },
+          function(err: any) {
+            return err;
+          }
+        )
+    );
+  }
 }

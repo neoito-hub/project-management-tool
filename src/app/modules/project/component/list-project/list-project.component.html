@@ -12,5 +12,20 @@
     <td>{{ project?.clientName }}</td>
     <td>{{ project?.email }}</td>
     <td>{{ project?.startDate.seconds * 1000 | date }}</td>
+
+    <div class="btn-group">
+      <button
+        class="btn btn-sm btn-edit btn-white mr-0 editbtn-margin"
+        [routerLink]="['/resource/']"
+      >
+        Edit
+      </button>
+      <button
+        class="btn btn-sm btn-edit btn-white mr-0 editbtn-margin"
+        (click)="clickDelete(resource)"
+      >
+        Delete
+      </button>
+    </div>
   </tr>
 </table>

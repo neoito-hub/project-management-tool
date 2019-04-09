@@ -1,0 +1,65 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label>Project Name</label>
+          <input
+            type="text"
+            formControlName="projectName"
+            class="form-control"
+          />
+
+          <label>Client Name</label>
+          <input
+            type="text"
+            formControlName="clientName"
+            class="form-control"
+          />
+
+          <label>Country</label>
+          <select class="form-control" id="country" formControlName="country">
+            <option *ngFor="let country of countries" [value]="country.code">{{
+              country.name
+            }}</option>
+          </select>
+
+          <label>email</label>
+          <input
+            type="text"
+            email
+            formControlName="email"
+            class="form-control"
+          />
+
+          <label>Skype ID</label>
+          <input type="text" formControlName="skypeId" class="form-control" />
+
+          <label>Start Date</label>
+          <input type="date" formControlName="startDate" class="form-control" />
+
+          <label>status</label>
+          <select class="form-control" id="status" formControlName="status">
+            <option
+              *ngFor="let status of statusList"
+              [value]="status.statusCode"
+              >{{ status.status }}</option
+            >
+          </select>
+
+          <button class="btn btn-primary" style="margin-top: 10px;">
+            Save Project and Proceed
+          </button>
+          <button
+            (click)="onCancel()"
+            class="btn btn-primary"
+            style="    margin-left: 19px;
+          margin-top: 10px;"
+          >
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
