@@ -43,9 +43,8 @@ export class ResourceService {
     // console.log('payload =>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', payload);
 
     return this.firestore
-      .collection('resourcesList', ref =>
-        ref.where('resourceId', '==', payload)
-      )
+      .collection('resourcesList')
+      .doc(payload)
       .valueChanges();
   }
 

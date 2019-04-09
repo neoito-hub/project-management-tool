@@ -43,4 +43,13 @@ export class ProjectService {
         )
     );
   }
+
+  getProjectDetail(payload: any): Observable<any> {
+    console.log('payload =>>>>', payload);
+    return this.afStore
+      .collection('projects')
+      .doc(payload)
+      .collection('resources')
+      .valueChanges();
+  }
 }

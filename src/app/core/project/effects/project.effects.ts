@@ -62,4 +62,22 @@ export class ProjectEffects {
       );
     })
   );
+
+  //Find Prroject effect
+  @Effect()
+  findproject$ = this.actions.pipe(
+    ofType(fromProjectActions.FIND_PROJECT),
+    switchMap((action: fromProjectActions.FindProjectAction) => {
+      return this.fromProjectServices.getProjectDetail(action.payload).pipe(
+        map(data => {
+          console.log('inside add project detail effect', data);
+          return new fromProjectActions.FindProjectActionSuccess(data);
+        }),
+        catchError(error => {
+          console.log(error);
+          return of(new fromProjectActions.FindProjectActionError());
+        })
+      );
+    })
+  );
 }

@@ -6,13 +6,15 @@ export interface ProjectState {
   isLoading: boolean;
   error: boolean;
   count: number;
+  projectDetail: any[];
 }
 
 export const initialState: ProjectState = {
   projectList: [],
   isLoading: false,
   error: false,
-  count: 0
+  count: 0,
+  projectDetail: []
 };
 
 export function ProjectReducer(
@@ -100,8 +102,30 @@ export function ProjectReducer(
         error: true
       };
     }
+
+    case fromProjectActions.FIND_PROJECT: {
+      return {
+        ...state,
+        isLoading: true
+      };
+    }
+    case fromProjectActions.FIND_PROJECT_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false,
+        projectDetail: action.payload
+      };
+    }
+    case fromProjectActions.FIND_PROJECT_ERROR: {
+      return {
+        ...state,
+        isLoading: false,
+        error: true
+      };
+    }
   }
 }
 export const getProjects = (state: ProjectState) => state.projectList;
 export const getProjectsIsLoading = (state: ProjectState) => state.isLoading;
 export const getProjectsError = (state: ProjectState) => state.error;
+export const getProjectDetail = (state: ProjectState) => state.projectDetail;
