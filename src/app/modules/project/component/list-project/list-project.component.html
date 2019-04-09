@@ -1,31 +1,28 @@
 <table>
   <tr>
     <th>Project Name</th>
-    <th>Description</th>
     <th>client</th>
+    <th>Country</th>
+    <th>Skype</th>
     <th>Email</th>
     <th>Start Date</th>
   </tr>
   <tr *ngFor="let project of projects">
     <td>{{ project?.projectName }}</td>
-    <td>{{ project?.description }}</td>
     <td>{{ project?.clientName }}</td>
+    <td>{{ project?.country }}</td>
+    <td>{{ project?.skypeId }}</td>
     <td>{{ project?.email }}</td>
-    <td>{{ project?.startDate.seconds * 1000 | date }}</td>
+    <td>{{ project?.startDate | date }}</td>
 
     <div class="btn-group">
       <button
         class="btn btn-sm btn-edit btn-white mr-0 editbtn-margin"
-        [routerLink]="['/resource/']"
+        [routerLink]="['/projects/edit', project.projectId]"
       >
         Edit
       </button>
-      <button
-        class="btn btn-sm btn-edit btn-white mr-0 editbtn-margin"
-        (click)="clickDelete(resource)"
-      >
-        Delete
-      </button>
+
       <button
         class="btn btn-sm btn-edit btn-white mr-0 editbtn-margin"
         [routerLink]="['/projects/detail/' + project?.projectId]"

@@ -29,19 +29,49 @@ export class ProjectService {
     // console.log(`Firebase response: ${result}`);
   }
   addProject(payload: any): any {
-    return from(
-      this.afStore
-        .collection('projects')
+    const projectRef = this.afStore.collection('projects');
+    return Observable.create(observer => {
+      projectRef
         .add(payload)
-        .then(
-          function(result: any) {
-            return result;
-          },
-          function(err: any) {
-            return err;
-          }
-        )
-    );
+        .then(res => {
+          projectRef
+            .doc(res.id)
+            .update({ projectId: res.id })
+            .then(() => {
+              observer.next({ error: false, projectId: res.id });
+            })
+            .catch(() => {
+              observer.next({ error: true });
+            });
+        })
+        .catch(error => {
+          observer.next({ error: true });
+        });
+    });
+  }
+
+  getProject(payload: any): Observable<any> {
+    return this.afStore
+      .collection('projects')
+      .doc(payload)
+      .valueChanges();
+  }
+
+  //Edit Project service
+  editProject(payload: any): Observable<any> {
+    const projectRef = this.afStore.collection('projects');
+    return Observable.create(observer => {
+      console.log('Edit servive' + JSON.stringify(payload));
+      projectRef
+        .doc(payload.projectId)
+        .update(payload)
+        .then(res => {
+          observer.next({ error: false, responce: res });
+        })
+        .catch(err => {
+          observer.next({ error: true });
+        });
+    });
   }
 
   getProjectDetail(payload: any): Observable<any> {

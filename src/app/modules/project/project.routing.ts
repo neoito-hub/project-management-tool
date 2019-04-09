@@ -20,6 +20,11 @@ const routes: Routes = [
     path: 'projects/detail/:id',
     component: ProjectDetailContainerComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'projects/edit/:id',
+    component: ProjectAddContainerComponent,
+    canActivate: [AuthGuard]
   }
 ];
 
