@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { LOGOUT_SUBMIT } from 'src/app/core/auth/actions/auth.action';
 import { Router } from '@angular/router';
@@ -11,7 +11,16 @@ import { Router } from '@angular/router';
 export class ResourceListComponent implements OnInit {
   @Input()
   resources: any;
+  @Output() delete: EventEmitter<string> = new EventEmitter<string>();
+
   constructor(public store: Store<any>, private router: Router) {}
 
   ngOnInit() {}
+
+  clickEdit() {
+    localStorage.setItem('resourceClick', 'EDIT');
+  }
+  clickDelete(id: string) {
+    this.delete.emit(id);
+  }
 }

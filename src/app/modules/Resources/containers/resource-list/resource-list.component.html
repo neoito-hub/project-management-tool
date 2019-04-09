@@ -1,8 +1,55 @@
-<app-resourcelist [resources]="data$ | async"></app-resourcelist>
+<app-resourcelist
+  [resources]="data$ | async"
+  (delete)="onClickDelete($event)"
+></app-resourcelist>
 <div class="fixed-bottom">
-  <button class="btn-fab" [routerLink]="['/resource-add']">
+  <button class="btn-fab" [routerLink]="['/resource-add']" (click)="clickAdd()">
     <!-- <i class="fa fa-plus" aria-hidden="true"></i> -->
 
     <img class="plus-button " src="assets/images/ic_add_white_18dp_1x.png" />
   </button>
+</div>
+
+<!--Delete Modal -->
+<div
+  class="modal fade delete-modal"
+  id="deleteModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="deleteModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <!-- <h5 class="modal-title" id="deleteModalLabel">Confirmation</h5> -->
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body pt-0 pr-0">
+        <label class="justify-content-center">
+          Are you sure you want to delete?</label
+        >
+      </div>
+      <div class="modal-footer justify-content-center pt-0 pb-4">
+        <button type="button" class="btn btn-white" data-dismiss="modal">
+          No
+        </button>
+        <button
+          type="button"
+          class="btn btn-success"
+          data-dismiss="modal"
+          (click)="deleteConfirm()"
+        >
+          Yes
+        </button>
+      </div>
+    </div>
+  </div>
 </div>

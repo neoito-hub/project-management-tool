@@ -57,4 +57,58 @@ export class ResourceEffect {
       );
     })
   );
+
+  @Effect()
+  findResource$ = this.actions.pipe(
+    ofType(fromActions.FIND_RESOURCE),
+    switchMap((action: fromActions.FindResourceAction) => {
+      return this._resourceService.getResource(action.payload).pipe(
+        map(data => {
+          console.log('data in our effect', data);
+          return new fromActions.FindResourceActionSuccess(data);
+        }),
+        catchError(error => {
+          console.log(error);
+          return of(new fromActions.FindResourceActionError());
+        })
+      );
+    })
+  );
+
+  @Effect()
+  updateResource$ = this.actions.pipe(
+    ofType(fromActions.UPDATE_RESOURCE),
+    switchMap((action: fromActions.UpdateResourceAction) => {
+      return this._resourceService.editResource(action.payload).pipe(
+        map(data => {
+          console.log('data in our edit effect', data);
+          return new fromActions.UpdateResourceActionSuccess(data);
+        }),
+        tap(() => {
+          this.router.navigate(['/resource-list']);
+        }),
+        catchError(error => {
+          console.log(error);
+          return of(new fromActions.UpdateResourceActionError());
+        })
+      );
+    })
+  );
+
+  @Effect()
+  deleteResource$ = this.actions.pipe(
+    ofType(fromActions.DELETE_RESOURCE),
+    switchMap((action: fromActions.DeleteResourceAction) => {
+      return this._resourceService.deleteResource(action.payload).pipe(
+        map(data => {
+          console.log('data in our delete effect', data);
+          return new fromActions.DeleteResourceActionSuccess(data);
+        }),
+        catchError(error => {
+          console.log(error);
+          return of(new fromActions.DeleteResourceActionError());
+        })
+      );
+    })
+  );
 }

@@ -19,13 +19,16 @@
     <div class="btn-group">
       <button
         class="btn btn-sm btn-edit btn-white mr-0 editbtn-margin"
-        [routerLink]="['/resource/']"
+        [routerLink]="['/resource-edit/' + resource?.resourceId]"
+        (click)="clickEdit()"
       >
         Edit
       </button>
       <button
         class="btn btn-sm btn-edit btn-white mr-0 editbtn-margin"
-        (click)="clickDelete(resource)"
+        (click)="clickDelete(resource.resourceId)"
+        data-toggle="modal"
+        data-target="#deleteModal"
       >
         Delete
       </button>

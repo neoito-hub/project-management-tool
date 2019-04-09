@@ -16,6 +16,11 @@ const routes: Routes = [
     path: 'resource-add',
     component: ResourceAddContainerComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'resource-edit/:id',
+    component: ResourceAddContainerComponent,
+    canActivate: [AuthGuard]
   }
 ];
 

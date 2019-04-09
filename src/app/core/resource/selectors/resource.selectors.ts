@@ -17,3 +17,28 @@ export const getAllResourcesLoading = createSelector(
     return state.isLoading;
   }
 );
+
+export const getSelectedResourceId = createSelector(
+  getResourceState,
+  fromReducer.getResourceId
+);
+
+export const getSelectedResources = createSelector(
+  getSelectedResourceId,
+  getAllResources,
+  (getSelectedResourceId: string, getAllResources: any[]) => {
+    console.log(getSelectedResourceId, getAllResources);
+    if (getSelectedResourceId && getAllResources) {
+      return getAllResources.find(
+        (data: any) => data.resourceId === getSelectedResourceId
+      );
+    } else {
+      return getAllResources;
+    }
+  }
+);
+
+export const getSelectedResources1 = createSelector(
+  getResourceState,
+  fromReducer.getResourceSelected
+);

@@ -9,39 +9,19 @@ import * as Resource from '../../../../core/resource';
   selector: 'app-resourceaddcontainer',
   templateUrl: './resource-add.component.html'
 })
-export class ResourceAddContainerComponent implements OnInit {
+export class ResourceAddContainerComponent {
   registerForm: FormGroup;
 
   constructor(
     private _store: Store<any>,
     private formBuilder: FormBuilder,
     private router: Router
-  ) {
-    this.buildForm();
+  ) {}
+
+  onSubmitProperty(value) {
+    this._store.dispatch(new Resource.AddResourceAction(value));
   }
-
-  ngOnInit() {}
-
-  onSubmit() {
-    // alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value));
-    this._store.dispatch(
-      new Resource.AddResourceAction(this.registerForm.value)
-    );
-  }
-
-  buildForm() {
-    this.registerForm = this.formBuilder.group({
-      bitbucket: [''],
-      email: [''],
-      experience: [''],
-      github: [''],
-      gitlab: [''],
-      name: [''],
-      upwork: ['']
-    });
-  }
-
-  cancel() {
-    this.router.navigate(['resource-list']);
+  onUpdateProperty(value) {
+    this._store.dispatch(new Resource.UpdateResourceAction(value));
   }
 }
