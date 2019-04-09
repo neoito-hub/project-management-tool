@@ -17,6 +17,10 @@ export const REMOVE_PROJECT = '[PROJECT] REMOVE_PROJECT';
 export const REMOVE_PROJECT_SUCCESS = '[PROJECT] REMOVE_PROJECT_SUCCESS';
 export const REMOVE_PROJECT_ERROR = '[PROJECT] REMOVE_PROJECT_ERROR';
 
+export const FIND_PROJECT = '[PROJECT] FIND_PROJECT';
+export const FIND_PROJECT_SUCCESS = '[PROJECT] FIND_PROJECT_SUCCESS';
+export const FIND_PROJECT_ERROR = '[PROJECT] FIND_PROJECT_ERROR';
+
 export const DOCUMENT_UPLOAD = '[PROJECT] DOCUMENT_UPLOAD';
 export const DOCUMENT_UPLOAD_SUCCESS = '[PROJECT] DOCUMENT_UPLOAD_SUCCESS';
 export const DOCUMENT_UPLOAD_ERROR = '[PROJECT] DOCUMENT_UPLOAD_ERROR';
@@ -62,6 +66,20 @@ export class EditProjectError implements Action {
   constructor(public payload: any) {}
 }
 
+//Find Project
+export class FindProject implements Action {
+  readonly type = FIND_PROJECT;
+  constructor(public payload?: any) {}
+}
+export class FindProjectSuccess implements Action {
+  readonly type = FIND_PROJECT_SUCCESS;
+  constructor(public payload: any) {}
+}
+export class FindProjectError implements Action {
+  readonly type = FIND_PROJECT_ERROR;
+  constructor(public payload: any) {}
+}
+
 //Remove Project
 export class RemoveProjectAction implements Action {
   readonly type = REMOVE_PROJECT;
@@ -100,6 +118,9 @@ export type ProjectAction =
   | EditProject
   | EditProjectError
   | EditProjectSuccess
+  | FindProject
+  | FindProjectError
+  | FindProjectSuccess
   | RemoveProjectAction
   | RemoveProjectActionSuccess
   | RemoveProjectActionError

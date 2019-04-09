@@ -62,4 +62,41 @@ export class ProjectEffects {
       );
     })
   );
+  //Find Single Item Effect
+  @Effect()
+  findProject$ = this.actions.pipe(
+    ofType(fromProjectActions.FIND_PROJECT),
+    switchMap((action: fromProjectActions.FindProject) => {
+      return this.fromProjectServices.getProject(action.payload).pipe(
+        map(data => {
+          console.log('data in our effect', data);
+          return new fromProjectActions.FindProjectSuccess(data);
+        }),
+        catchError(error => {
+          console.log(error);
+          return of(new fromProjectActions.FindProjectError(error));
+        })
+      );
+    })
+  );
+  //Update project effect
+  @Effect()
+  editProject$ = this.actions.pipe(
+    ofType(fromProjectActions.EDIT_PROJECT),
+    switchMap((action: fromProjectActions.EditProject) => {
+      console.log('payload in our edit effect', action.payload);
+      return this.fromProjectServices.editProject(action.payload).pipe(
+        map(data => {
+          return new fromProjectActions.EditProjectSuccess(data);
+        }),
+        tap(() => {
+          this.router.navigate(['/projects']);
+        }),
+        catchError(error => {
+          console.log(error);
+          return of(new fromProjectActions.EditProjectError(error));
+        })
+      );
+    })
+  );
 }

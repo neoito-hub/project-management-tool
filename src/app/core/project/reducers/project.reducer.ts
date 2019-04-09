@@ -3,6 +3,7 @@ import { Project } from '../models/project.model';
 
 export interface ProjectState {
   projectList: Project[];
+  selectedProject: Project[];
   isLoading: boolean;
   error: boolean;
   count: number;
@@ -10,6 +11,7 @@ export interface ProjectState {
 
 export const initialState: ProjectState = {
   projectList: [],
+  selectedProject: [],
   isLoading: false,
   error: false,
   count: 0
@@ -62,6 +64,26 @@ export function ProjectReducer(
         error: true
       };
     }
+    case fromProjectActions.FIND_PROJECT: {
+      return {
+        ...state,
+        isLoading: true
+      };
+    }
+    case fromProjectActions.FIND_PROJECT_SUCCESS: {
+      return {
+        ...state,
+        selectedProject: action.payload,
+        isLoading: false
+      };
+    }
+    case fromProjectActions.FIND_PROJECT_ERROR: {
+      return {
+        ...state,
+        isLoading: false,
+        error: true
+      };
+    }
     case fromProjectActions.EDIT_PROJECT: {
       return {
         ...state,
@@ -105,3 +127,5 @@ export function ProjectReducer(
 export const getProjects = (state: ProjectState) => state.projectList;
 export const getProjectsIsLoading = (state: ProjectState) => state.isLoading;
 export const getProjectsError = (state: ProjectState) => state.error;
+export const getProjectSelected = (state: ProjectState) =>
+  state.selectedProject;

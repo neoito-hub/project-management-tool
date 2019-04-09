@@ -11,6 +11,11 @@ export const getAllProjects = createSelector(
   fromReducer.getProjects
 );
 
+export const getProjectSelected = createSelector(
+  getProjectState,
+  fromReducer.getProjectSelected
+);
+
 export const getAllProjectsLoading = createSelector(
   getProjectState,
   (state: ProjectState) => {

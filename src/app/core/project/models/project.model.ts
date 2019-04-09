@@ -5,9 +5,11 @@ export interface Project {
   country?: string;
   email?: string;
   skypeId?: string;
-  startDate?: string;
+  startDate?: number;
   documents?: Document[];
   allocatedResource: AllocatedResource[];
+  status: string;
+  projectId?: string;
 }
 
 export interface AllocatedResource {

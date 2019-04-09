@@ -25,12 +25,7 @@
           </select>
 
           <label>email</label>
-          <input
-            type="text"
-            email
-            formControlName="email"
-            class="form-control"
-          />
+          <input type="text" formControlName="email" class="form-control" />
 
           <label>Skype ID</label>
           <input type="text" formControlName="skypeId" class="form-control" />
@@ -47,8 +42,21 @@
             >
           </select>
 
-          <button class="btn btn-primary" style="margin-top: 10px;">
+          <button
+            type="submit"
+            class="btn btn-primary"
+            style="margin-top: 10px;"
+            *ngIf="!isEdit"
+          >
             Save Project and Proceed
+          </button>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            style="margin-top: 10px;"
+            *ngIf="isEdit"
+          >
+            Edit Project
           </button>
           <button
             (click)="onCancel()"
