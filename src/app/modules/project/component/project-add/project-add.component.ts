@@ -23,8 +23,6 @@ export class ProjectAddComponent implements OnInit {
   isEdit: boolean;
   @Input() set project(data) {
     if (data) {
-      console.log('req project data =>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', data);
-      // this.myForm.patchValue(data);
       this.buildForm(data);
     }
   }
@@ -70,22 +68,36 @@ export class ProjectAddComponent implements OnInit {
       country: [projectData.country, [Validators.required]],
       email: [projectData.email, [Validators.required, Validators.email]],
       skypeId: [projectData.skypeId, [Validators.required]],
-      startDate: [projectData.startDate, [Validators.required]],
+      startDate: [
+        this.formatToDate(projectData.startDate),
+        [Validators.required]
+      ],
       status: [projectData.status, [Validators.required]]
     });
   }
 
-  convertDateToSeconds(formDate: string): any {
+  formatToTimestamp(formDate: string): any {
     console.log(formDate);
     let myDate = formDate.split('-');
     let newDate = myDate[0] + '/' + myDate[1] + '/' + myDate[2];
     console.log(myDate);
     return new Date(newDate).getTime();
   }
+  formatToDate(date) {
+    var d = new Date(date),
+      month = '' + (d.getMonth() + 1),
+      day = '' + d.getDate(),
+      year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('-');
+  }
   onSubmit() {
     this.value = this.myForm.value;
     let formDate = this.value.startDate;
-    let timestamp = this.convertDateToSeconds(formDate);
+    let timestamp = this.formatToTimestamp(formDate);
     this.myForm.patchValue({ startDate: timestamp });
 
     this.value = this.myForm.value;

@@ -30,7 +30,7 @@ export class ProjectEffects {
     switchMap((action: fromProjectActions.LoadProjectAction) => {
       return this.fromProjectServices.loadProjects().pipe(
         map(data => {
-          console.log(data);
+          //console.log(data);
           //this.router.navigate(['dashboard']);
           return new fromProjectActions.LoadProjectActionSuccess(data);
         }),
