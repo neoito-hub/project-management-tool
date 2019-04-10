@@ -1,5 +1,6 @@
 import { Action } from '@ngrx/store';
 import { Project } from '../models/project.model';
+import { FindResourceActionError } from '../../resource';
 
 export const ADD_PROJECT = '[PROJECT] ADD_PROJECT ';
 export const ADD_PROJECT_SUCCESS = '[PROJECT] ADD_PROJECT_SUCCESS';
@@ -24,6 +25,12 @@ export const FIND_PROJECT_ERROR = '[PROJECT] FIND_PROJECT_ERROR';
 export const DOCUMENT_UPLOAD = '[PROJECT] DOCUMENT_UPLOAD';
 export const DOCUMENT_UPLOAD_SUCCESS = '[PROJECT] DOCUMENT_UPLOAD_SUCCESS';
 export const DOCUMENT_UPLOAD_ERROR = '[PROJECT] DOCUMENT_UPLOAD_ERROR';
+
+export const GET_PROJECT_RESOURCES = '[PROJECT] GET_PROJECT_RESOURCES';
+export const GET_PROJECT_RESOURCES_SUCCESS =
+  '[PROJECT] GET_PROJECT_RESOURCES_SUCCESS';
+export const GET_PROJECT_RESOURCES_ERROR =
+  '[PROJECT] GET_PROJECT_RESOURCES_ERROR';
 
 // Load Project
 export class LoadProjectAction implements Action {
@@ -107,6 +114,21 @@ export class DocumentUploadActionError implements Action {
   constructor(public payload: any) {}
 }
 
+export class GetProjectResources implements Action {
+  readonly type = GET_PROJECT_RESOURCES;
+  constructor(public payload: any) {}
+}
+
+export class GetProjectResourcesSuccess implements Action {
+  readonly type = GET_PROJECT_RESOURCES_SUCCESS;
+  constructor(public payload: any) {}
+}
+
+export class GetProjectResourcesError implements Action {
+  readonly type = GET_PROJECT_RESOURCES_ERROR;
+  constructor(public payload?: any) {}
+}
+
 // action type
 export type ProjectAction =
   | LoadProjectAction
@@ -126,4 +148,7 @@ export type ProjectAction =
   | RemoveProjectActionError
   | DocumentUploadAction
   | DocumentUploadActionSuccess
-  | DocumentUploadActionError;
+  | DocumentUploadActionError
+  | GetProjectResources
+  | GetProjectResourcesSuccess
+  | GetProjectResourcesError;

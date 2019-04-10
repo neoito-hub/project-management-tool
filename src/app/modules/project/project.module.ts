@@ -6,6 +6,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ListProjectContainerComponent } from './container/list-project/list-project.component';
 import { ProjectAddComponent } from './component/project-add/project-add.component';
 import { ProjectAddContainerComponent } from './container/project-add/project-add.component';
+import { ProjectDetailComponent } from './component/project-detail/project-detail.component';
+import { ProjectDetailContainerComponent } from './container/project-detail/project-detail.component';
 
 @NgModule({
   imports: [CommonModule, ProjectRoutingModule, ReactiveFormsModule],
@@ -13,7 +15,9 @@ import { ProjectAddContainerComponent } from './container/project-add/project-ad
     ListProjectComponent,
     ListProjectContainerComponent,
     ProjectAddComponent,
-    ProjectAddContainerComponent
+    ProjectAddContainerComponent,
+    ProjectDetailComponent,
+    ProjectDetailContainerComponent
   ]
 })
 export class ProjectModule {}

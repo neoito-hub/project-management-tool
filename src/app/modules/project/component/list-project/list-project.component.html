@@ -22,6 +22,14 @@
       >
         Edit
       </button>
+
+      <button
+        class="btn btn-sm btn-edit btn-white mr-0 editbtn-margin"
+        [routerLink]="['/projects/detail/' + project?.projectId]"
+        style="background-color:blue"
+      >
+        View more
+      </button>
     </div>
   </tr>
 </table>

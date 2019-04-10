@@ -39,9 +39,7 @@ export class ResourceAddComponent implements OnInit {
       this.selectedData$ = this._store.select(Resource.getSelectedResources1);
       this.selectedData$.subscribe((v: any) => {
         if (v) {
-          if (v.length == 1) {
-            this.registerForm.patchValue(v[0]);
-          }
+          this.registerForm.patchValue(v);
         }
       });
     } else {

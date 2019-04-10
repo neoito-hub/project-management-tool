@@ -1,0 +1,81 @@
+<h3>Project details</h3>
+<table>
+  <tr>
+    <th>ClientName</th>
+    <th>Country</th>
+    <th>Description</th>
+    <th>Documents</th>
+    <th>email</th>
+    <th>ProjectName</th>
+    <th>skypeId</th>
+    <th>startDate</th>
+  </tr>
+  <tr>
+    <td>{{ projectdata?.clientName }}</td>
+    <td>{{ projectdata?.country }}</td>
+    <td>{{ projectdata?.description }}</td>
+    <td>
+      <label class="label-location" data-toggle="modal" data-target="#modal"
+        >View documents</label
+      >
+    </td>
+    <td>{{ projectdata?.email }}</td>
+    <td>{{ projectdata?.projectName }}</td>
+    <td>{{ projectdata?.skypeId }}</td>
+    <td>{{ projectdata?.startDate | date }}</td>
+  </tr>
+</table>
+
+<hr />
+<h4>Resource details</h4>
+<table>
+  <tr>
+    <th>Allocation</th>
+    <th>Cost Per Hour</th>
+    <th>hours</th>
+    <th>name</th>
+  </tr>
+  <tr *ngFor="let resource of projectResourcedata">
+    <td>
+      {{ resource.allocation }}
+    </td>
+    <td>{{ resource.costPerHour }}</td>
+    <td>{{ resource.hours }}</td>
+    <td>{{ resource.name }}</td>
+  </tr>
+</table>
+
+<button
+  class="btn btn-primary"
+  style="float: right;margin-right: 10px"
+  (click)="goBack()"
+>
+  Back
+</button>
+
+<!-- modal documents -->
+<div class="modal fade" id="modal" role="dialog">
+  <div class="modal-dialog modal-md modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Documents</h4>
+        <button type="button" class="close" data-dismiss="modal">
+          &times;
+        </button>
+      </div>
+      <div class="modal-body">
+        <div
+          class="chip"
+          *ngFor="let chip of projectdata.documents; let i = index"
+        >
+          <p>{{ chip?.name }},{{ chip?.url }}</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-white " data-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

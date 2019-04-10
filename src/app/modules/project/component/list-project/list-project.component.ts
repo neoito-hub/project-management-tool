@@ -10,7 +10,5 @@ export class ListProjectComponent implements OnInit {
   projects: any;
   constructor() {}
 
-  ngOnInit() {
-    //console.log('from list ' + JSON.stringify(this.projects));
-  }
+  ngOnInit() {}
 }
