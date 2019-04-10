@@ -76,6 +76,7 @@ export class ProjectAddComponent implements OnInit {
   }
 
   convertDateToSeconds(formDate: string): any {
+    console.log(formDate);
     let myDate = formDate.split('-');
     let newDate = myDate[0] + '/' + myDate[1] + '/' + myDate[2];
     console.log(myDate);

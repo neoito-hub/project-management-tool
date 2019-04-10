@@ -24,14 +24,14 @@ export function ProjectReducer(
   // State interface
   switch (action.type) {
     case fromProjectActions.LOAD_PROJECT: {
-      console.log(`inside load acton`);
+      //console.log(`inside load acton`);
       return {
         ...state,
         isLoading: true
       };
     }
     case fromProjectActions.LOAD_PROJECT_SUCCESS: {
-      console.log(`inside load acton success`);
+      //console.log(`inside load acton success`);
       return {
         ...state,
         projectList: action.payload,

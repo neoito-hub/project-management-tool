@@ -35,7 +35,7 @@ export class ProjectEffects {
           return new fromProjectActions.LoadProjectActionSuccess(data);
         }),
         catchError(error => {
-          console.log(error);
+          //console.log(error);
           return of(new fromProjectActions.LoadProjectActionError(error));
         })
       );
@@ -49,14 +49,14 @@ export class ProjectEffects {
     switchMap((action: fromProjectActions.AddProject) => {
       return this.fromProjectServices.addProject(action.payload).pipe(
         map(data => {
-          console.log('inside add project effect: Added succesfully');
+          //console.log('inside add project effect: Added succesfully');
           return new fromProjectActions.AddProjectSuccess('success');
         }),
         tap(() => {
           this.router.navigate(['/projects']);
         }),
         catchError(error => {
-          console.log(error);
+          // console.log(error);
           return of(new fromProjectActions.AddProjectError());
         })
       );
@@ -69,11 +69,11 @@ export class ProjectEffects {
     switchMap((action: fromProjectActions.FindProject) => {
       return this.fromProjectServices.getProject(action.payload).pipe(
         map(data => {
-          console.log('data in our effect', data);
+          //console.log('data in our effect', data);
           return new fromProjectActions.FindProjectSuccess(data);
         }),
         catchError(error => {
-          console.log(error);
+          // console.log(error);
           return of(new fromProjectActions.FindProjectError(error));
         })
       );
@@ -84,7 +84,7 @@ export class ProjectEffects {
   editProject$ = this.actions.pipe(
     ofType(fromProjectActions.EDIT_PROJECT),
     switchMap((action: fromProjectActions.EditProject) => {
-      console.log('payload in our edit effect', action.payload);
+      //console.log('payload in our edit effect', action.payload);
       return this.fromProjectServices.editProject(action.payload).pipe(
         map(data => {
           return new fromProjectActions.EditProjectSuccess(data);
@@ -93,7 +93,7 @@ export class ProjectEffects {
           this.router.navigate(['/projects']);
         }),
         catchError(error => {
-          console.log(error);
+          // console.log(error);
           return of(new fromProjectActions.EditProjectError(error));
         })
       );

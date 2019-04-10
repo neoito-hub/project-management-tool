@@ -27,7 +27,7 @@ export const getSelectedResources = createSelector(
   getSelectedResourceId,
   getAllResources,
   (getSelectedResourceId: string, getAllResources: any[]) => {
-    console.log(getSelectedResourceId, getAllResources);
+    //console.log(getSelectedResourceId, getAllResources);
     if (getSelectedResourceId && getAllResources) {
       return getAllResources.find(
         (data: any) => data.resourceId === getSelectedResourceId
