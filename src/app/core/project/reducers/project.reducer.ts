@@ -152,5 +152,5 @@ export const getProjectsIsLoading = (state: ProjectState) => state.isLoading;
 export const getProjectsError = (state: ProjectState) => state.error;
 export const getProjectResources = (state: ProjectState) =>
   state.projectResources;
-export const getProjectSelected = (state: ProjectState) =>
+export const getSelectedProject = (state: ProjectState) =>
   state.selectedProject;

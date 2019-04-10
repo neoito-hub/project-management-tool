@@ -1,48 +1,60 @@
 <h3>Project details</h3>
 <table>
   <tr>
+    <th>ProjectName</th>
     <th>ClientName</th>
     <th>Country</th>
-    <th>Description</th>
     <th>Documents</th>
     <th>email</th>
-    <th>ProjectName</th>
     <th>skypeId</th>
     <th>startDate</th>
   </tr>
   <tr>
+    <td>{{ projectdata?.projectName }}</td>
     <td>{{ projectdata?.clientName }}</td>
     <td>{{ projectdata?.country }}</td>
-    <td>{{ projectdata?.description }}</td>
     <td>
       <label class="label-location" data-toggle="modal" data-target="#modal"
         >View documents</label
       >
     </td>
     <td>{{ projectdata?.email }}</td>
-    <td>{{ projectdata?.projectName }}</td>
     <td>{{ projectdata?.skypeId }}</td>
     <td>{{ projectdata?.startDate | date }}</td>
+    <button class="btn btn-primary">Upload New Document</button>
   </tr>
 </table>
 
 <hr />
-<h4>Resource details</h4>
+<h4>Allocated Resource details</h4>
 <table>
   <tr>
-    <th>Allocation</th>
+    <th>Sl. No</th>
+    <th>name</th>
     <th>Cost Per Hour</th>
     <th>hours</th>
-    <th>name</th>
+    <th>Allocation From</th>
+
+    <th>Allocation To</th>
   </tr>
-  <tr *ngFor="let resource of projectResourcedata">
-    <td>
-      {{ resource.allocation }}
-    </td>
+  <tr *ngFor="let resource of projectResourcedata; let i = index">
+    <td>{{ i + 1 }}</td>
+    <td>{{ resource.name }}</td>
     <td>{{ resource.costPerHour }}</td>
     <td>{{ resource.hours }}</td>
-    <td>{{ resource.name }}</td>
+
+    <td>
+      {{ resource.allocation[0].start | date }}
+    </td>
+    <td>
+      {{ resource.allocation[0].end | date }}
+    </td>
+
+    <button class="btn btn-danger" value="">Remove</button>
   </tr>
+  <button class="btn btn-primary" data-toggle="modal" data-target="#resources">
+    Allocate new Recources
+  </button>
 </table>
 
 <button
@@ -66,13 +78,83 @@
       <div class="modal-body">
         <div
           class="chip"
-          *ngFor="let chip of projectdata.documents; let i = index"
+          *ngFor="let chip of projectdata?.documents; let i = index"
         >
           <p>{{ chip?.name }},{{ chip?.url }}</p>
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-white " data-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- modal Allocate Resources -->
+<div class="modal fade" id="resources" role="dialog">
+  <div class="modal-dialog modal-md modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Add New Resource</h4>
+        <button type="button" class="close" data-dismiss="modal">
+          &times;
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="resource">Cost Per Hour:</label>
+          <select class="form-control">
+            <option *ngFor="let resource of projectResourceList">
+              {{ resource.name }}
+            </option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="costPerHour">Cost Per Hour:</label>
+          <input
+            type="number"
+            class="form-control"
+            id="costPerHour"
+            placeholder="Cost Per Hour"
+            name="costPerHour"
+          />
+        </div>
+        <div class="form-group">
+          <label for="hours">Hours:</label>
+          <input
+            type="number"
+            class="form-control"
+            id="hours"
+            placeholder="No of hours"
+            name="hours"
+          />
+        </div>
+        <div class="form-group">
+          <label for="hours">Allocated from:</label>
+          <input
+            type="date"
+            class="form-control"
+            id="hours"
+            placeholder="No of hours"
+            name="hours"
+          />
+        </div>
+        <div class="form-group">
+          <label for="hours">Allocated to:</label>
+          <input
+            type="date"
+            class="form-control"
+            id="hours"
+            placeholder="No of hours"
+            name="hours"
+          />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary">Allocate</button>
+        <button type="button" class="btn btn-danger " data-dismiss="modal">
           Close
         </button>
       </div>
