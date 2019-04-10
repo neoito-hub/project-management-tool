@@ -26,9 +26,11 @@ export const DOCUMENT_UPLOAD = '[PROJECT] DOCUMENT_UPLOAD';
 export const DOCUMENT_UPLOAD_SUCCESS = '[PROJECT] DOCUMENT_UPLOAD_SUCCESS';
 export const DOCUMENT_UPLOAD_ERROR = '[PROJECT] DOCUMENT_UPLOAD_ERROR';
 
-export const FIND_PROJECT = '[PROJECT] FIND_PROJECT';
-export const FIND_PROJECT_SUCCESS = '[PROJECT] FIND_PROJECT_SUCCESS';
-export const FIND_PROJECT_ERROR = '[PROJECT] FIND_PROJECT_ERROR';
+export const GET_PROJECT_RESOURCES = '[PROJECT] GET_PROJECT_RESOURCES';
+export const GET_PROJECT_RESOURCES_SUCCESS =
+  '[PROJECT] GET_PROJECT_RESOURCES_SUCCESS';
+export const GET_PROJECT_RESOURCES_ERROR =
+  '[PROJECT] GET_PROJECT_RESOURCES_ERROR';
 
 // Load Project
 export class LoadProjectAction implements Action {
@@ -112,18 +114,18 @@ export class DocumentUploadActionError implements Action {
   constructor(public payload: any) {}
 }
 
-export class FindProjectAction implements Action {
-  readonly type = FIND_PROJECT;
+export class GetProjectResources implements Action {
+  readonly type = GET_PROJECT_RESOURCES;
   constructor(public payload: any) {}
 }
 
-export class FindProjectActionSuccess implements Action {
-  readonly type = FIND_PROJECT_SUCCESS;
+export class GetProjectResourcesSuccess implements Action {
+  readonly type = GET_PROJECT_RESOURCES_SUCCESS;
   constructor(public payload: any) {}
 }
 
-export class FindProjectActionError implements Action {
-  readonly type = FIND_PROJECT_ERROR;
+export class GetProjectResourcesError implements Action {
+  readonly type = GET_PROJECT_RESOURCES_ERROR;
   constructor(public payload?: any) {}
 }
 
@@ -147,6 +149,6 @@ export type ProjectAction =
   | DocumentUploadAction
   | DocumentUploadActionSuccess
   | DocumentUploadActionError
-  | FindProjectAction
-  | FindProjectActionSuccess
-  | FindProjectActionError;
+  | GetProjectResources
+  | GetProjectResourcesSuccess
+  | GetProjectResourcesError;

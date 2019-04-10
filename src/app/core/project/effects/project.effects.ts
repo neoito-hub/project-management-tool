@@ -62,22 +62,24 @@ export class ProjectEffects {
       );
     })
   );
-<<<<<<< HEAD
 
   //Find Prroject effect
   @Effect()
-  findproject$ = this.actions.pipe(
-    ofType(fromProjectActions.FIND_PROJECT),
-    switchMap((action: fromProjectActions.FindProjectAction) => {
+  getprojectResources$ = this.actions.pipe(
+    ofType(fromProjectActions.GET_PROJECT_RESOURCES),
+    switchMap((action: fromProjectActions.GetProjectResources) => {
       return this.fromProjectServices.getProjectDetail(action.payload).pipe(
         map(data => {
           console.log('inside add project detail effect', data);
-          return new fromProjectActions.FindProjectActionSuccess(data);
+          return new fromProjectActions.GetProjectResourcesSuccess(data);
         }),
         catchError(error => {
           console.log(error);
-          return of(new fromProjectActions.FindProjectActionError());
-=======
+          return of(new fromProjectActions.GetProjectResourcesError());
+        })
+      );
+    })
+  );
   //Find Single Item Effect
   @Effect()
   findProject$ = this.actions.pipe(
@@ -111,7 +113,6 @@ export class ProjectEffects {
         catchError(error => {
           console.log(error);
           return of(new fromProjectActions.EditProjectError(error));
->>>>>>> b9af1587a6d8b0f5af3fde4ae3f6f0671513e0b9
         })
       );
     })

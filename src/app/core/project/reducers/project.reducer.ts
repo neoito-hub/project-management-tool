@@ -3,20 +3,20 @@ import { Project } from '../models/project.model';
 
 export interface ProjectState {
   projectList: Project[];
-  selectedProject: Project[];
+  selectedProject: Object;
   isLoading: boolean;
   error: boolean;
   count: number;
-  projectDetail: any[];
+  projectResources: any[];
 }
 
 export const initialState: ProjectState = {
   projectList: [],
-  selectedProject: [],
+  selectedProject: {},
   isLoading: false,
   error: false,
   count: 0,
-  projectDetail: []
+  projectResources: []
 };
 
 export function ProjectReducer(
@@ -125,20 +125,20 @@ export function ProjectReducer(
       };
     }
 
-    case fromProjectActions.FIND_PROJECT: {
+    case fromProjectActions.GET_PROJECT_RESOURCES: {
       return {
         ...state,
         isLoading: true
       };
     }
-    case fromProjectActions.FIND_PROJECT_SUCCESS: {
+    case fromProjectActions.GET_PROJECT_RESOURCES_SUCCESS: {
       return {
         ...state,
         isLoading: false,
-        projectDetail: action.payload
+        projectResources: action.payload
       };
     }
-    case fromProjectActions.FIND_PROJECT_ERROR: {
+    case fromProjectActions.GET_PROJECT_RESOURCES_ERROR: {
       return {
         ...state,
         isLoading: false,
@@ -150,6 +150,7 @@ export function ProjectReducer(
 export const getProjects = (state: ProjectState) => state.projectList;
 export const getProjectsIsLoading = (state: ProjectState) => state.isLoading;
 export const getProjectsError = (state: ProjectState) => state.error;
-export const getProjectDetail = (state: ProjectState) => state.projectDetail;
+export const getProjectResources = (state: ProjectState) =>
+  state.projectResources;
 export const getProjectSelected = (state: ProjectState) =>
   state.selectedProject;

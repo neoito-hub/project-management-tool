@@ -6,7 +6,4 @@ import { Router } from '@angular/router';
   selector: 'app-project-detail-component',
   templateUrl: './project-detail.component.html'
 })
-export class ProjectDetailComponent implements OnInit {
-  constructor(public _store: Store<any>, private router: Router) {}
-  ngOnInit() {}
-}
+export class ProjectDetailComponent {}

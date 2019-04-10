@@ -15,6 +15,10 @@ export const getProjectSelected = createSelector(
   getProjectState,
   fromReducer.getProjectSelected
 );
+export const getProjectResources1 = createSelector(
+  getProjectState,
+  fromReducer.getProjectResources
+);
 
 export const getAllProjectsLoading = createSelector(
   getProjectState,
