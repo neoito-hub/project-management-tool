@@ -8,6 +8,7 @@ import { ProjectAddComponent } from './component/project-add/project-add.compone
 import { ProjectAddContainerComponent } from './container/project-add/project-add.component';
 import { ProjectDetailComponent } from './component/project-detail/project-detail.component';
 import { ProjectDetailContainerComponent } from './container/project-detail/project-detail.component';
+import { FileUploadComponent } from './container/file-upload/file-upload.component';
 
 @NgModule({
   imports: [CommonModule, ProjectRoutingModule, ReactiveFormsModule],
@@ -17,7 +18,8 @@ import { ProjectDetailContainerComponent } from './container/project-detail/proj
     ProjectAddComponent,
     ProjectAddContainerComponent,
     ProjectDetailComponent,
-    ProjectDetailContainerComponent
+    ProjectDetailContainerComponent,
+    FileUploadComponent
   ]
 })
 export class ProjectModule {}

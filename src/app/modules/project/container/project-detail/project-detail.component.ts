@@ -42,4 +42,7 @@ export class ProjectDetailContainerComponent implements OnInit {
   goBack() {
     this.route.navigate(['/projects']);
   }
+  upload() {
+    this.route.navigate(['/projects/file-upload']);
+  }
 }

@@ -4,6 +4,7 @@ import { ListProjectContainerComponent } from './container/list-project/list-pro
 import { ProjectAddContainerComponent } from './container/project-add/project-add.component';
 import { AuthGuardService as AuthGuard } from 'src/app/core/auth/services/auth-guard.service';
 import { ProjectDetailContainerComponent } from './container/project-detail/project-detail.component';
+import { FileUploadComponent } from './container/file-upload/file-upload.component';
 
 const routes: Routes = [
   {
@@ -24,6 +25,11 @@ const routes: Routes = [
   {
     path: 'projects/edit/:id',
     component: ProjectAddContainerComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'projects/file-upload',
+    component: FileUploadComponent,
     canActivate: [AuthGuard]
   }
 ];

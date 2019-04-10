@@ -14,9 +14,12 @@ import { AuthGuardService } from './core/auth/services/auth-guard.service';
 import { ResourcesModule } from './modules/Resources/resources.module';
 import { ProjectModule } from './modules/project/project.module';
 import { AngularFireDatabase } from '@angular/fire/database';
+import { DropZoneDirective } from './drop-zone.directive';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { FileSizePipe } from './shared/file-size.pipe';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, DropZoneDirective, FileSizePipe],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -27,7 +30,8 @@ import { AngularFireDatabase } from '@angular/fire/database';
     ProjectModule,
     ResourcesModule,
     AuthModule,
-    CoreModule
+    CoreModule,
+    AngularFireStorageModule
   ],
   providers: [AuthGuardService, AngularFireDatabase],
   bootstrap: [AppComponent]
