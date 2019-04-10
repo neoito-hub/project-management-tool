@@ -31,7 +31,7 @@ export class ResourceEffect {
           return new fromActions.LoadResourceActionSuccess(data);
         }),
         catchError(error => {
-          console.log(error);
+          //console.log(error);
           return of(new fromActions.LoadResourceActionError());
         })
       );
@@ -44,14 +44,14 @@ export class ResourceEffect {
     switchMap((action: fromActions.AddResourceAction) => {
       return this._resourceService.addResource(action.payload).pipe(
         map(data => {
-          console.log('data in add effect', data);
+          //console.log('data in add effect', data);
           return new fromActions.AddResourceActionSuccess(data);
         }),
         tap(() => {
           this.router.navigate(['/resource-list']);
         }),
         catchError(error => {
-          console.log(error);
+          //console.log(error);
           return of(new fromActions.AddResourceActionError());
         })
       );
@@ -64,11 +64,11 @@ export class ResourceEffect {
     switchMap((action: fromActions.FindResourceAction) => {
       return this._resourceService.getResource(action.payload).pipe(
         map(data => {
-          console.log('data in our effect', data);
+          //console.log('data in our effect', data);
           return new fromActions.FindResourceActionSuccess(data);
         }),
         catchError(error => {
-          console.log(error);
+          //console.log(error);
           return of(new fromActions.FindResourceActionError());
         })
       );
@@ -81,14 +81,14 @@ export class ResourceEffect {
     switchMap((action: fromActions.UpdateResourceAction) => {
       return this._resourceService.editResource(action.payload).pipe(
         map(data => {
-          console.log('data in our edit effect', data);
+          //console.log('data in our edit effect', data);
           return new fromActions.UpdateResourceActionSuccess(data);
         }),
         tap(() => {
           this.router.navigate(['/resource-list']);
         }),
         catchError(error => {
-          console.log(error);
+          //console.log(error);
           return of(new fromActions.UpdateResourceActionError());
         })
       );
@@ -101,11 +101,11 @@ export class ResourceEffect {
     switchMap((action: fromActions.DeleteResourceAction) => {
       return this._resourceService.deleteResource(action.payload).pipe(
         map(data => {
-          console.log('data in our delete effect', data);
+          //console.log('data in our delete effect', data);
           return new fromActions.DeleteResourceActionSuccess(data);
         }),
         catchError(error => {
-          console.log(error);
+          //console.log(error);
           return of(new fromActions.DeleteResourceActionError());
         })
       );

@@ -24,12 +24,12 @@ export class AuthEffects {
     switchMap((action: fromAuthActions.LoginSubmit) => {
       return this.fromAuthServices.getUserData(action.payload).pipe(
         map(data => {
-          console.log(data);
+          //console.log(data);
           this.router.navigate(['dashboard']);
           return new fromAuthActions.LoginSuccess(data);
         }),
         catchError(error => {
-          console.log(error);
+          //console.log(error);
           return of(new fromAuthActions.LoginFail());
         })
       );
@@ -43,12 +43,12 @@ export class AuthEffects {
     switchMap((action: fromAuthActions.LogoutSubmit) => {
       return this.fromAuthServices.logout(action.payload).pipe(
         map(data => {
-          console.log(data);
+          //console.log(data);
           this.router.navigate(['login']);
           return new fromAuthActions.LogoutSuccess(data);
         }),
         catchError(error => {
-          console.log(error);
+          //console.log(error);
           return of(new fromAuthActions.LogoutFail());
         })
       );

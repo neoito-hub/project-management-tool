@@ -31,11 +31,11 @@ export class AuthService {
         if (user) {
           this.fireUser = user;
           localStorage.setItem('user', JSON.stringify(this.fireUser));
-          console.log('User is authenticated'); //for debug
+          //console.log('User is authenticated'); //for debug
           return user;
         } else {
           localStorage.setItem('user', null);
-          console.log('User is not authenticated'); //for debug
+          //console.log('User is not authenticated'); //for debug
           return null;
         }
       }),
@@ -50,13 +50,13 @@ export class AuthService {
     var result = from(
       this.afAuth.auth.signInWithEmailAndPassword(email, password)
     );
-    console.log(`Firebase response: ${result}`);
+    //console.log(`Firebase response: ${result}`);
     return result;
   }
   //logout service
   logout(payload: User): Observable<void> {
     var result = from(this.afAuth.auth.signOut());
-    console.log(`Firebase response: ${result}`);
+    //console.log(`Firebase response: ${result}`);
     return result;
   }
 }

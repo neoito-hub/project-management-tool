@@ -22,7 +22,7 @@ export class ProjectService {
   loadProjects(): Observable<any> {
     return this.afStore
       .collection('/projects', ref => {
-        console.log(`Firebase response: ${ref}`);
+        //console.log(`Firebase response: ${ref}`);
         return ref;
       })
       .valueChanges();
@@ -61,7 +61,7 @@ export class ProjectService {
   editProject(payload: any): Observable<any> {
     const projectRef = this.afStore.collection('projects');
     return Observable.create(observer => {
-      console.log('Edit servive' + JSON.stringify(payload));
+      //console.log('Edit servive' + JSON.stringify(payload));
       projectRef
         .doc(payload.projectId)
         .update(payload)

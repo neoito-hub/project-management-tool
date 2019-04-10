@@ -7,7 +7,7 @@ export class ResourceService {
   constructor(private firestore: AngularFirestore) {}
 
   getResourceList(): any {
-    // console.log('in service');
+    console.log('in service');
 
     return this.firestore
       .collection('resourcesList', ref => {

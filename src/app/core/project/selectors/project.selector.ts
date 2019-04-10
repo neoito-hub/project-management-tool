@@ -13,9 +13,9 @@ export const getAllProjects = createSelector(
 
 export const getProjectSelected = createSelector(
   getProjectState,
-  fromReducer.getProjectSelected
+  fromReducer.getSelectedProject
 );
-export const getProjectResources1 = createSelector(
+export const getResourcesOfProject = createSelector(
   getProjectState,
   fromReducer.getProjectResources
 );

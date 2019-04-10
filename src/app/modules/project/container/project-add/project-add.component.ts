@@ -19,12 +19,12 @@ export class ProjectAddContainerComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
   ngOnInit() {
-    console.log(`>>>>>>>>>>>>>>router value: ${this.router.url}`);
+    // console.log(`>>>>>>>>>>>>>>router value: ${this.router.url}`);
     if (this.router.url == '/projects/add') {
       this.isEdit = false;
     } else {
       this.route.params.subscribe(params => {
-        console.log(params.id);
+        // console.log(params.id);
         if (params) {
           this._store.dispatch(new Project.FindProject(params.id));
         }
@@ -41,12 +41,12 @@ export class ProjectAddContainerComponent implements OnInit {
 
   onSubmitProject(value) {
     if (!this.isEdit) {
-      console.log('emitted value');
-      console.log(value);
+      // console.log('emitted value');
+      // console.log(value);
       this._store.dispatch(new Project.AddProject(value));
     } else {
-      console.log('emitted value to update');
-      console.log(value);
+      // console.log('emitted value to update');
+      // console.log(value);
       this._store.dispatch(new Project.EditProject(value));
     }
   }
