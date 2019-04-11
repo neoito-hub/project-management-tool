@@ -49,6 +49,7 @@ export class ResourceService {
   }
 
   editResource(payload: any): Observable<any> {
+    console.log('in resource edit service', payload.data);
     const resourceRef = this.firestore.collection('resourcesList');
     return Observable.create(observer => {
       resourceRef

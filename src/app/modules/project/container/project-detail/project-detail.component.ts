@@ -67,15 +67,11 @@ export class ProjectDetailContainerComponent implements OnInit {
   goBack() {
     this.route.navigate(['/projects']);
   }
-  uploadDoc() {
+  uploadDoc(args: any) {
+    console.log('argsss=>', args);
     const initialState = {
-      list: [
-        'Open a modal with component',
-        'Pass your data',
-        'Do something else',
-        '...'
-      ],
-      title: 'Modal with component'
+      title: 'Upload your files here',
+      projectID: args
     };
     this.bsModalRef = this.modalService.show(FileUploadComponent, {
       initialState

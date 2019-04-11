@@ -21,7 +21,7 @@
     <td>{{ projectdata?.email }}</td>
     <td>{{ projectdata?.skypeId }}</td>
     <td>{{ projectdata?.startDate | date }}</td>
-    <button class="btn btn-primary" (click)="uploadDoc()">
+    <button class="btn btn-primary" (click)="uploadDoc(projectdata.projectId)">
       Upload New Document
     </button>
   </tr>

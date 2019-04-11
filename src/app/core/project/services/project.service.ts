@@ -13,6 +13,7 @@ import { map, catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ProjectService {
+  arr = [];
   constructor(
     public afAuth: AngularFireAuth,
     public afStore: AngularFirestore,
@@ -81,5 +82,26 @@ export class ProjectService {
       .doc(payload)
       .collection('resources')
       .valueChanges();
+  }
+
+  addDocuments(x, y, z): Observable<any> {
+    // console.log('got oitttttttttttttttttttttttt', x, y, z);
+    const projectRef = this.afStore.collection('projects');
+    let obj = { name: y, url: x };
+    this.arr.push(obj);
+    // console.log('arrrrrrrrrrrrrrrrrrrrrr', this.arr);
+    return Observable.create(observer => {
+      //console.log('Edit servive' + JSON.stringify(payload));
+      projectRef
+        .doc(z)
+        .update({ documents: this.arr })
+        .then(res => {
+          // console.log('nammude res', res);
+          observer.next({ error: false, responce: 'Sucess' });
+        })
+        .catch(err => {
+          observer.next({ error: true });
+        });
+    });
   }
 }
