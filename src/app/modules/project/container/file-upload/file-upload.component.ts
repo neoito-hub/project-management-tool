@@ -7,6 +7,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { finalize } from 'rxjs/operators';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'file-upload',
@@ -14,6 +15,8 @@ import { finalize } from 'rxjs/operators';
   styleUrls: ['./file-upload.component.scss']
 })
 export class FileUploadComponent {
+  title: string;
+  closeBtnName: string;
   // Main task
   task: AngularFireUploadTask;
 
@@ -29,7 +32,11 @@ export class FileUploadComponent {
   isHovering: boolean;
   downloadURL$: Observable<string>;
 
-  constructor(private storage: AngularFireStorage) {}
+  constructor(
+    private storage: AngularFireStorage,
+    public bsModalRef: BsModalRef,
+    private db: AngularFirestore
+  ) {}
 
   toggleHover(event: boolean) {
     this.isHovering = event;
@@ -57,14 +64,15 @@ export class FileUploadComponent {
     // Progress monitoring
     this.percentage = this.task.percentageChanges();
     console.log('percentage', this.percentage);
-    this.snapshot = this.task.snapshotChanges();
-    console.log('snapshot ->>>', this.snapshot);
+
     // The file's download URL
     const fileRef = this.storage.ref(path);
     this.task
       .snapshotChanges()
       .pipe(finalize(() => (this.downloadURL = fileRef.getDownloadURL())))
-      .subscribe();
+      .subscribe((v: any) => {
+        console.log('vvvvvvvvvvvvvvvv', v);
+      });
 
     // this.downloadURL$ = fileRef.getDownloadURL();
     // this.downloadURL$ = this.task.downloadURL();

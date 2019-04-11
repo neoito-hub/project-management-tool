@@ -21,7 +21,9 @@
     <td>{{ projectdata?.email }}</td>
     <td>{{ projectdata?.skypeId }}</td>
     <td>{{ projectdata?.startDate | date }}</td>
-    <button class="btn btn-primary">Upload New Document</button>
+    <button class="btn btn-primary" (click)="uploadDoc()">
+      Upload New Document
+    </button>
   </tr>
 </table>
 
@@ -63,13 +65,6 @@
   (click)="goBack()"
 >
   Back
-</button>
-<button
-  class="btn btn-primary"
-  style="float: left;margin-left: 10px"
-  (click)="upload()"
->
-  Upload
 </button>
 
 <!-- modal documents -->
