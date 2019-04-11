@@ -82,4 +82,29 @@ export class ProjectService {
       .collection('resources')
       .valueChanges();
   }
+  //To add new resources
+  addProjectAllocation(payload: any): Observable<any> {
+    const projectResourceRef = this.afStore
+      .collection(`projects`)
+      .doc(`${payload.projectId}`)
+      .collection('resources');
+    return Observable.create(observer => {
+      projectResourceRef
+        .add(payload)
+        .then(res => {
+          projectResourceRef
+            .doc(res.id)
+            .update({ id: res.id })
+            .then(() => {
+              observer.next({ error: false, allocatonId: res.id });
+            })
+            .catch(() => {
+              observer.next({ error: true });
+            });
+        })
+        .catch(error => {
+          observer.next({ error: true });
+        });
+    });
+  }
 }

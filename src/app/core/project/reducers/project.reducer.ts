@@ -8,6 +8,7 @@ export interface ProjectState {
   error: boolean;
   count: number;
   projectResources: any[];
+  //singleResource: Object;
 }
 
 export const initialState: ProjectState = {
@@ -17,6 +18,7 @@ export const initialState: ProjectState = {
   error: false,
   count: 0,
   projectResources: []
+  //singleResource:{}
 };
 
 export function ProjectReducer(
@@ -139,6 +141,26 @@ export function ProjectReducer(
       };
     }
     case fromProjectActions.GET_PROJECT_RESOURCES_ERROR: {
+      return {
+        ...state,
+        isLoading: false,
+        error: true
+      };
+    }
+    //Add REsource Allocation
+    case fromProjectActions.ADD_RESOURCE_ALLOCATION: {
+      return {
+        ...state,
+        isLoading: true
+      };
+    }
+    case fromProjectActions.ADD_RESOURCE_ALLOCATION_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false
+      };
+    }
+    case fromProjectActions.ADD_RESOURCE_ALLOCATION_ERROR: {
       return {
         ...state,
         isLoading: false,

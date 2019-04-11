@@ -63,7 +63,7 @@ export class ProjectEffects {
     })
   );
 
-  //Find Prroject effect
+  //Find Prroject Resources effect
   @Effect()
   getprojectResources$ = this.actions.pipe(
     ofType(fromProjectActions.GET_PROJECT_RESOURCES),
@@ -80,6 +80,24 @@ export class ProjectEffects {
       );
     })
   );
+  //Add Project Resources effect
+  @Effect()
+  addprojectResources$ = this.actions.pipe(
+    ofType(fromProjectActions.ADD_RESOURCE_ALLOCATION),
+    switchMap((action: fromProjectActions.AddResourceAllocationAction) => {
+      return this.fromProjectServices.addProjectAllocation(action.payload).pipe(
+        map(data => {
+          console.log('inside add project Allocation effect', data);
+          return new fromProjectActions.AddResourceAllocationSuccess(data);
+        }),
+        catchError(error => {
+          console.log(error);
+          return of(new fromProjectActions.AddResourceAllocationError(error));
+        })
+      );
+    })
+  );
+
   //Find Single Item Effect
   @Effect()
   findProject$ = this.actions.pipe(

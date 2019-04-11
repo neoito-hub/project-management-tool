@@ -8,6 +8,7 @@ import { ResourceService } from 'src/app/core/resource/services';
 import { map, catchError } from 'rxjs/operators';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { FileUploadComponent } from '../file-upload/file-upload.component';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-project-detail-container',
@@ -22,15 +23,23 @@ export class ProjectDetailContainerComponent implements OnInit {
   projectdata: any;
   projectResourcedata: any;
   projectResourceList: any;
+  isEdit: boolean;
+  myForm;
+  resource: any;
+  selectedResource;
   constructor(
     private projectStore: Store<Project.ProjectState>,
     private resourceStore: Store<Resource.ResourceState>,
     private router: ActivatedRoute,
     private route: Router,
     private resourceService: ResourceService,
-    private modalService: BsModalService
-  ) {}
+    private modalService: BsModalService,
+    private _fb: FormBuilder
+  ) {
+    this.isEdit = false;
+  }
   ngOnInit() {
+    console.log('heyyyyyyyyyyyyyyyyyyyyy', this.resource);
     let id = this.router.snapshot.paramMap.get('id');
     // this.resourceStore.dispatch(new Resource.LoadResourceAction());
     this.projectStore.dispatch(new Project.FindProject(id));
@@ -62,6 +71,24 @@ export class ProjectDetailContainerComponent implements OnInit {
     this.resourceService.getResourceList().subscribe(data => {
       this.projectResourceList = data;
     });
+
+    if (!this.isEdit) {
+      this.$projectdata.subscribe(v => {
+        if (v) {
+          this.projectdata = v;
+          this.myForm = this._fb.group({
+            id: '',
+            projectId: [this.projectdata.projectId],
+            resourceId: '',
+            name: [''],
+            costPerHour: ['', [Validators.required]],
+            hours: ['', [Validators.required]],
+            allocationStart: ['', [Validators.required]],
+            allocationEnd: ['', [Validators.required]]
+          });
+        }
+      });
+    }
   }
 
   goBack() {
@@ -81,5 +108,25 @@ export class ProjectDetailContainerComponent implements OnInit {
       initialState
     });
     this.bsModalRef.content.closeBtnName = 'Close';
+  }
+  onSubmitAllocation() {
+    if (!this.myForm.valid) {
+      alert('Make sure all feilds are filled');
+    } else {
+      this.projectStore.dispatch(
+        new Project.AddResourceAllocationAction(this.myForm.value)
+      );
+    }
+
+    console.log(this.myForm.value);
+  }
+  onChangeResource(id) {
+    //alert(`selected is ${id}`);
+    this.resourceService.getResourceList().subscribe(data => {
+      if (data) {
+        let res = data.find(res => res.resourceId == id);
+        this.myForm.patchValue({ name: res.name });
+      }
+    });
   }
 }
