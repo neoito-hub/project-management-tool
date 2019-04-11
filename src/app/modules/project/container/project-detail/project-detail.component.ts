@@ -6,6 +6,8 @@ import * as Resource from '../../../../core/resource';
 import { Observable } from 'rxjs';
 import { ResourceService } from 'src/app/core/resource/services';
 import { map, catchError } from 'rxjs/operators';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { FileUploadComponent } from '../file-upload/file-upload.component';
 
 @Component({
   selector: 'app-project-detail-container',
@@ -13,6 +15,7 @@ import { map, catchError } from 'rxjs/operators';
   styleUrls: ['./project-detail.component.css']
 })
 export class ProjectDetailContainerComponent implements OnInit {
+  bsModalRef: BsModalRef;
   $projectdata: Observable<any>;
   $projectResourcedata: Observable<any>;
   $projectResourceList: Observable<any>;
@@ -24,7 +27,8 @@ export class ProjectDetailContainerComponent implements OnInit {
     private resourceStore: Store<Resource.ResourceState>,
     private router: ActivatedRoute,
     private route: Router,
-    private resourceService: ResourceService
+    private resourceService: ResourceService,
+    private modalService: BsModalService
   ) {}
   ngOnInit() {
     let id = this.router.snapshot.paramMap.get('id');
@@ -63,7 +67,19 @@ export class ProjectDetailContainerComponent implements OnInit {
   goBack() {
     this.route.navigate(['/projects']);
   }
-  upload() {
-    this.route.navigate(['/projects/file-upload']);
+  uploadDoc() {
+    const initialState = {
+      list: [
+        'Open a modal with component',
+        'Pass your data',
+        'Do something else',
+        '...'
+      ],
+      title: 'Modal with component'
+    };
+    this.bsModalRef = this.modalService.show(FileUploadComponent, {
+      initialState
+    });
+    this.bsModalRef.content.closeBtnName = 'Close';
   }
 }

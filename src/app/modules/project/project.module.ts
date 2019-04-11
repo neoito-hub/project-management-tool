@@ -9,9 +9,15 @@ import { ProjectAddContainerComponent } from './container/project-add/project-ad
 import { ProjectDetailComponent } from './component/project-detail/project-detail.component';
 import { ProjectDetailContainerComponent } from './container/project-detail/project-detail.component';
 import { FileUploadComponent } from './container/file-upload/file-upload.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
-  imports: [CommonModule, ProjectRoutingModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    ProjectRoutingModule,
+    ReactiveFormsModule,
+    [ModalModule.forRoot()]
+  ],
   declarations: [
     ListProjectComponent,
     ListProjectContainerComponent,
