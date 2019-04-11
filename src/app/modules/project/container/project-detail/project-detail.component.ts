@@ -113,9 +113,21 @@ export class ProjectDetailContainerComponent implements OnInit {
     if (!this.myForm.valid) {
       alert('Make sure all feilds are filled');
     } else {
-      this.projectStore.dispatch(
-        new Project.AddResourceAllocationAction(this.myForm.value)
-      );
+      if (!this.isEdit) {
+        this.projectStore.dispatch(
+          new Project.AddResourceAllocationAction(this.myForm.value)
+        );
+      }
+      if (this.isEdit) {
+        this.projectStore.dispatch(
+          new Project.EditResourceAllocationAction(this.myForm.value)
+        );
+        this.isEdit = false;
+        let patchId = this.myForm.value.projectId;
+        this.myForm.reset();
+        this.myForm.patchValue({ projectId: patchId });
+        this.isEdit = false;
+      }
     }
 
     console.log(this.myForm.value);
@@ -126,6 +138,15 @@ export class ProjectDetailContainerComponent implements OnInit {
       if (data) {
         let res = data.find(res => res.resourceId == id);
         this.myForm.patchValue({ name: res.name });
+      }
+    });
+  }
+  editResourcePopup(id) {
+    this.$projectResourcedata.subscribe(data => {
+      if (data) {
+        let res = data.find(res => res.id == id);
+        this.myForm.patchValue(res);
+        this.isEdit = true;
       }
     });
   }

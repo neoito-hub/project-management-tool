@@ -38,6 +38,12 @@ export const ADD_RESOURCE_ALLOCATION_SUCCESS =
 export const ADD_RESOURCE_ALLOCATION_ERROR =
   '[PROJECT] ADD_RESOURCE_ALLOCATION_ERROR';
 
+export const EDIT_RESOURCE_ALLOCATION = '[PROJECT] EDIT_RESOURCE_ALLOCATION';
+export const EDIT_RESOURCE_ALLOCATION_SUCCESS =
+  '[PROJECT] EDIT_RESOURCE_ALLOCATION_SUCCESS';
+export const EDIT_RESOURCE_ALLOCATION_ERROR =
+  '[PROJECT] EDIT_RESOURCE_ALLOCATION_ERROR';
+
 // Load Project
 export class LoadProjectAction implements Action {
   readonly type = LOAD_PROJECT;
@@ -133,6 +139,19 @@ export class AddResourceAllocationError implements Action {
   readonly type = ADD_RESOURCE_ALLOCATION_ERROR;
   constructor(public payload: any) {}
 }
+//Edit Resource Allocation
+export class EditResourceAllocationAction implements Action {
+  readonly type = EDIT_RESOURCE_ALLOCATION;
+  constructor(public payload: any) {}
+}
+export class EditResourceAllocationSuccess implements Action {
+  readonly type = EDIT_RESOURCE_ALLOCATION_SUCCESS;
+  constructor(public payload: any) {}
+}
+export class EditResourceAllocationError implements Action {
+  readonly type = EDIT_RESOURCE_ALLOCATION_ERROR;
+  constructor(public payload: any) {}
+}
 //Get single resource of single project
 export class GetProjectResources implements Action {
   readonly type = GET_PROJECT_RESOURCES;
@@ -174,4 +193,7 @@ export type ProjectAction =
   | GetProjectResourcesError
   | AddResourceAllocationAction
   | AddResourceAllocationSuccess
-  | AddResourceAllocationError;
+  | AddResourceAllocationError
+  | EditResourceAllocationAction
+  | EditResourceAllocationSuccess
+  | EditResourceAllocationError;

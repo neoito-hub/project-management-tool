@@ -107,4 +107,23 @@ export class ProjectService {
         });
     });
   }
+  //Edit Project service
+  editProjectAllocation(payload: any): Observable<any> {
+    const projectResourceRef = this.afStore
+      .collection(`projects`)
+      .doc(`${payload.projectId}`)
+      .collection('resources');
+    return Observable.create(observer => {
+      //console.log('Edit servive' + JSON.stringify(payload));
+      projectResourceRef
+        .doc(payload.id)
+        .update(payload)
+        .then(res => {
+          observer.next({ error: false, responce: res });
+        })
+        .catch(err => {
+          observer.next({ error: true });
+        });
+    });
+  }
 }

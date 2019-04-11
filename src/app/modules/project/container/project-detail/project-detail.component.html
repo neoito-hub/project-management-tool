@@ -51,7 +51,13 @@
     <td>
       {{ resource.allocationEnd | date }}
     </td>
-    <button class="btn btn-info" value="">
+    <button
+      class="btn btn-info"
+      value=""
+      data-toggle="modal"
+      data-target="#resources"
+      (click)="editResourcePopup(resource.id)"
+    >
       Edit
     </button>
     <button class="btn btn-danger" value="">
@@ -169,7 +175,8 @@
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-primary">
-            Allocate
+            <span *ngIf="!isEdit">Allocate</span>
+            <span *ngIf="isEdit">Update Allocaton</span>
           </button>
           <button type="button" class="btn btn-danger " data-dismiss="modal">
             Close

@@ -135,4 +135,28 @@ export class ProjectEffects {
       );
     })
   );
+  //Edit project resource
+  @Effect()
+  editProjectAllocation$ = this.actions.pipe(
+    ofType(fromProjectActions.EDIT_RESOURCE_ALLOCATION),
+    switchMap((action: fromProjectActions.EditProject) => {
+      console.log('payload in our edit effect', action.payload);
+      return this.fromProjectServices
+        .editProjectAllocation(action.payload)
+        .pipe(
+          map(data => {
+            return new fromProjectActions.EditResourceAllocationSuccess(data);
+          }),
+          tap(() => {
+            // this.router.navigate([`projects/detail/${action.payload.projectId}`]);
+          }),
+          catchError(error => {
+            // console.log(error);
+            return of(
+              new fromProjectActions.EditResourceAllocationError(error)
+            );
+          })
+        );
+    })
+  );
 }
