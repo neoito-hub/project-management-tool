@@ -109,62 +109,73 @@
           &times;
         </button>
       </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <label for="resource">Select Resource:</label>
-          <select class="form-control">
-            <option *ngFor="let resource of projectResourceList">
-              {{ resource.name }}
-            </option>
-          </select>
+      <form [formGroup]="myForm" (ngSubmit)="onSubmitAllocation()">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="resource">Select Resource:</label>
+            <select
+              class="form-control"
+              formControlName="resourceId"
+              (click)="onChangeResource($event.target.value)"
+            >
+              <option
+                *ngFor="let resource of projectResourceList"
+                value="{{ resource.resourceId }}"
+              >
+                {{ resource.name }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="costPerHour">Cost Per Hour:</label>
+            <input
+              type="number"
+              class="form-control"
+              id="costPerHour"
+              placeholder="Cost Per Hour"
+              formControlName="costPerHour"
+            />
+          </div>
+          <div class="form-group">
+            <label for="hours">Hours:</label>
+            <input
+              type="number"
+              class="form-control"
+              id="hours"
+              placeholder="No of hours"
+              formControlName="hours"
+            />
+          </div>
+          <div class="form-group">
+            <label for="hours">Allocated from:</label>
+            <input
+              type="date"
+              class="form-control"
+              id="hours"
+              placeholder="No of hours"
+              formControlName="allocationStart"
+            />
+          </div>
+          <div class="form-group">
+            <label for="hours">Allocated to:</label>
+            <input
+              type="date"
+              class="form-control"
+              id="hours"
+              placeholder="No of hours"
+              formControlName="allocationEnd"
+            />
+          </div>
         </div>
-        <div class="form-group">
-          <label for="costPerHour">Cost Per Hour:</label>
-          <input
-            type="number"
-            class="form-control"
-            id="costPerHour"
-            placeholder="Cost Per Hour"
-            name="costPerHour"
-          />
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">
+            Allocate
+          </button>
+          <button type="button" class="btn btn-danger " data-dismiss="modal">
+            Close
+          </button>
         </div>
-        <div class="form-group">
-          <label for="hours">Hours:</label>
-          <input
-            type="number"
-            class="form-control"
-            id="hours"
-            placeholder="No of hours"
-            name="hours"
-          />
-        </div>
-        <div class="form-group">
-          <label for="hours">Allocated from:</label>
-          <input
-            type="date"
-            class="form-control"
-            id="hours"
-            placeholder="No of hours"
-            name="hours"
-          />
-        </div>
-        <div class="form-group">
-          <label for="hours">Allocated to:</label>
-          <input
-            type="date"
-            class="form-control"
-            id="hours"
-            placeholder="No of hours"
-            name="hours"
-          />
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-primary">Allocate</button>
-        <button type="button" class="btn btn-danger " data-dismiss="modal">
-          Close
-        </button>
-      </div>
+      </form>
     </div>
   </div>
 </div>

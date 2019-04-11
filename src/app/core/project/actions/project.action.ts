@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 import { Project } from '../models/project.model';
-import { FindResourceActionError } from '../../resource';
+import { FindResourceActionError, AddResourceAction } from '../../resource';
 
 export const ADD_PROJECT = '[PROJECT] ADD_PROJECT ';
 export const ADD_PROJECT_SUCCESS = '[PROJECT] ADD_PROJECT_SUCCESS';
@@ -31,6 +31,12 @@ export const GET_PROJECT_RESOURCES_SUCCESS =
   '[PROJECT] GET_PROJECT_RESOURCES_SUCCESS';
 export const GET_PROJECT_RESOURCES_ERROR =
   '[PROJECT] GET_PROJECT_RESOURCES_ERROR';
+
+export const ADD_RESOURCE_ALLOCATION = '[PROJECT] ADD_RESOURCE_ALLOCATION';
+export const ADD_RESOURCE_ALLOCATION_SUCCESS =
+  '[PROJECT] ADD_RESOURCE_ALLOCATION_SUCCESS';
+export const ADD_RESOURCE_ALLOCATION_ERROR =
+  '[PROJECT] ADD_RESOURCE_ALLOCATION_ERROR';
 
 // Load Project
 export class LoadProjectAction implements Action {
@@ -114,6 +120,20 @@ export class DocumentUploadActionError implements Action {
   constructor(public payload: any) {}
 }
 
+//Add Resource Allocation
+export class AddResourceAllocationAction implements Action {
+  readonly type = ADD_RESOURCE_ALLOCATION;
+  constructor(public payload: any) {}
+}
+export class AddResourceAllocationSuccess implements Action {
+  readonly type = ADD_RESOURCE_ALLOCATION_SUCCESS;
+  constructor(public payload: { id: string }) {}
+}
+export class AddResourceAllocationError implements Action {
+  readonly type = ADD_RESOURCE_ALLOCATION_ERROR;
+  constructor(public payload: any) {}
+}
+//Get single resource of single project
 export class GetProjectResources implements Action {
   readonly type = GET_PROJECT_RESOURCES;
   constructor(public payload: any) {}
@@ -151,4 +171,7 @@ export type ProjectAction =
   | DocumentUploadActionError
   | GetProjectResources
   | GetProjectResourcesSuccess
-  | GetProjectResourcesError;
+  | GetProjectResourcesError
+  | AddResourceAllocationAction
+  | AddResourceAllocationSuccess
+  | AddResourceAllocationError;
