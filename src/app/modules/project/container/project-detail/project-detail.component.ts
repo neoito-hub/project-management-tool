@@ -60,7 +60,7 @@ export class ProjectDetailContainerComponent implements OnInit {
         this.projectdata = v;
         if (v.documents) {
           this.projectDocuments = v.documents;
-          console.log('project documents', this.projectDocuments);
+          //console.log('project documents', this.projectDocuments);
         }
       }
     });
@@ -72,25 +72,27 @@ export class ProjectDetailContainerComponent implements OnInit {
         this.projectResourcedata = v;
       }
     });
+    //e
+    this.populateResourceDropdown();
 
+    if (!this.isEdit) {
+      this.buildForm();
+    }
+  }
+  populateResourceDropdown() {
     this.resourceService.getResourceList().subscribe(data => {
       //this.projectResourceList = data;
       let allocatedData = this.projectResourcedata;
       let excludeIds = allocatedData.map(data => {
         return data.resourceId;
       });
-      console.log('excl', excludeIds);
+      //console.log('excl', excludeIds);
       this.projectResourceList = data.filter(item => {
-        console.log('item', item);
+        //console.log('item', item);
         return excludeIds.indexOf(item.resourceId) == -1;
       });
     });
-
-    if (!this.isEdit) {
-      this.buildForm();
-    }
   }
-
   goBack() {
     this.route.navigate(['/projects']);
   }
@@ -110,6 +112,7 @@ export class ProjectDetailContainerComponent implements OnInit {
       alert('Make sure all feilds are filled');
     } else {
       if (!this.isEdit) {
+        //console.log(this.myForm.value);
         this.projectStore.dispatch(
           new Project.AddResourceAllocationAction(this.myForm.value)
         );
@@ -122,7 +125,7 @@ export class ProjectDetailContainerComponent implements OnInit {
       }
     }
 
-    console.log(this.myForm.value);
+    //console.log(this.myForm.value);
   }
   onChangeResource(id) {
     //alert(`selected is ${id}`);
@@ -148,8 +151,10 @@ export class ProjectDetailContainerComponent implements OnInit {
     );
   }
   clearAndPatch() {
+    this.populateResourceDropdown();
     this.isEdit = false;
     this.myForm.reset();
+    this.buildForm();
   }
   buildForm() {
     this.$projectdata.subscribe(v => {
