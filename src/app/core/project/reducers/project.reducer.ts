@@ -169,7 +169,8 @@ export function ProjectReducer(
         isLoading: false,
         error: true
       };
-    } //Edit REsource Allocation
+    }
+    //Edit REsource Allocation
     case fromProjectActions.EDIT_RESOURCE_ALLOCATION: {
       return {
         ...state,
@@ -183,6 +184,26 @@ export function ProjectReducer(
       };
     }
     case fromProjectActions.EDIT_RESOURCE_ALLOCATION_ERROR: {
+      return {
+        ...state,
+        isLoading: false,
+        error: true
+      };
+    }
+    //Delete REsource Allocation
+    case fromProjectActions.DELETE_RESOURCE_ALLOCATION: {
+      return {
+        ...state,
+        isLoading: true
+      };
+    }
+    case fromProjectActions.DELETE_RESOURCE_ALLOCATION_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false
+      };
+    }
+    case fromProjectActions.DELETE_RESOURCE_ALLOCATION_ERROR: {
       return {
         ...state,
         isLoading: false,

@@ -44,6 +44,13 @@ export const EDIT_RESOURCE_ALLOCATION_SUCCESS =
 export const EDIT_RESOURCE_ALLOCATION_ERROR =
   '[PROJECT] EDIT_RESOURCE_ALLOCATION_ERROR';
 
+export const DELETE_RESOURCE_ALLOCATION =
+  '[PROJECT] DELETE_RESOURCE_ALLOCATION';
+export const DELETE_RESOURCE_ALLOCATION_SUCCESS =
+  '[PROJECT] DELETE_RESOURCE_ALLOCATION_SUCCESS';
+export const DELETE_RESOURCE_ALLOCATION_ERROR =
+  '[PROJECT] DELETE_RESOURCE_ALLOCATION_ERROR';
+
 // Load Project
 export class LoadProjectAction implements Action {
   readonly type = LOAD_PROJECT;
@@ -152,6 +159,19 @@ export class EditResourceAllocationError implements Action {
   readonly type = EDIT_RESOURCE_ALLOCATION_ERROR;
   constructor(public payload: any) {}
 }
+//Delete Resource Allocation
+export class DeleteResourceAllocationAction implements Action {
+  readonly type = DELETE_RESOURCE_ALLOCATION;
+  constructor(public payload: any) {}
+}
+export class DeleteResourceAllocationSuccess implements Action {
+  readonly type = DELETE_RESOURCE_ALLOCATION_SUCCESS;
+  constructor(public payload: any) {}
+}
+export class DeleteResourceAllocationError implements Action {
+  readonly type = DELETE_RESOURCE_ALLOCATION_ERROR;
+  constructor(public payload: any) {}
+}
 //Get single resource of single project
 export class GetProjectResources implements Action {
   readonly type = GET_PROJECT_RESOURCES;
@@ -196,4 +216,7 @@ export type ProjectAction =
   | AddResourceAllocationError
   | EditResourceAllocationAction
   | EditResourceAllocationSuccess
-  | EditResourceAllocationError;
+  | EditResourceAllocationError
+  | DeleteResourceAllocationAction
+  | DeleteResourceAllocationSuccess
+  | DeleteResourceAllocationError;

@@ -9,7 +9,11 @@ import { map, catchError } from 'rxjs/operators';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { FileUploadComponent } from '../file-upload/file-upload.component';
 import { FormBuilder, Validators } from '@angular/forms';
+<<<<<<< HEAD
 import { ProjectService } from 'src/app/core/project/services';
+=======
+import { resource } from 'selenium-webdriver/http';
+>>>>>>> a9abe43e7431391f9d2b66d847f968500b3a778d
 
 @Component({
   selector: 'app-project-detail-container',
@@ -62,9 +66,13 @@ export class ProjectDetailContainerComponent implements OnInit {
         this.projectdata = v;
         if (v.documents) {
           this.projectDocuments = v.documents;
+<<<<<<< HEAD
           console.log('project documents', this.projectDocuments);
         } else {
           this.projectDocuments = [];
+=======
+          //console.log('project documents', this.projectDocuments);
+>>>>>>> a9abe43e7431391f9d2b66d847f968500b3a778d
         }
       }
     });
@@ -76,30 +84,27 @@ export class ProjectDetailContainerComponent implements OnInit {
         this.projectResourcedata = v;
       }
     });
-
-    this.resourceService.getResourceList().subscribe(data => {
-      this.projectResourceList = data;
-    });
+    //e
+    this.populateResourceDropdown();
 
     if (!this.isEdit) {
-      this.$projectdata.subscribe(v => {
-        if (v) {
-          this.projectdata = v;
-          this.myForm = this._fb.group({
-            id: '',
-            projectId: [this.projectdata.projectId],
-            resourceId: '',
-            name: [''],
-            costPerHour: ['', [Validators.required]],
-            hours: ['', [Validators.required]],
-            allocationStart: ['', [Validators.required]],
-            allocationEnd: ['', [Validators.required]]
-          });
-        }
-      });
+      this.buildForm();
     }
   }
-
+  populateResourceDropdown() {
+    this.resourceService.getResourceList().subscribe(data => {
+      //this.projectResourceList = data;
+      let allocatedData = this.projectResourcedata;
+      let excludeIds = allocatedData.map(data => {
+        return data.resourceId;
+      });
+      //console.log('excl', excludeIds);
+      this.projectResourceList = data.filter(item => {
+        //console.log('item', item);
+        return excludeIds.indexOf(item.resourceId) == -1;
+      });
+    });
+  }
   goBack() {
     this.route.navigate(['/projects']);
   }
@@ -119,6 +124,7 @@ export class ProjectDetailContainerComponent implements OnInit {
       alert('Make sure all feilds are filled');
     } else {
       if (!this.isEdit) {
+        //console.log(this.myForm.value);
         this.projectStore.dispatch(
           new Project.AddResourceAllocationAction(this.myForm.value)
         );
@@ -127,15 +133,11 @@ export class ProjectDetailContainerComponent implements OnInit {
         this.projectStore.dispatch(
           new Project.EditResourceAllocationAction(this.myForm.value)
         );
-        this.isEdit = false;
-        let patchId = this.myForm.value.projectId;
-        this.myForm.reset();
-        this.myForm.patchValue({ projectId: patchId });
-        this.isEdit = false;
+        //this.modalService.hide();
       }
     }
 
-    console.log(this.myForm.value);
+    //console.log(this.myForm.value);
   }
   onChangeResource(id) {
     //alert(`selected is ${id}`);
@@ -161,4 +163,32 @@ export class ProjectDetailContainerComponent implements OnInit {
     console.log('delDoc', delDoc);
     this.projectservice.addDocuments(delDoc, this.id);
   }
+  removeAllocation(resourceObj) {
+    this.projectStore.dispatch(
+      new Project.DeleteResourceAllocationAction(resourceObj)
+    );
+  }
+  clearAndPatch() {
+    this.populateResourceDropdown();
+    this.isEdit = false;
+    this.myForm.reset();
+    this.buildForm();
+  }
+  buildForm() {
+    this.$projectdata.subscribe(v => {
+      if (v) {
+        this.projectdata = v;
+        this.myForm = this._fb.group({
+          id: '',
+          projectId: [this.projectdata.projectId],
+          resourceId: '',
+          name: [''],
+          costPerHour: ['', [Validators.required]],
+          hours: ['', [Validators.required]],
+          allocationStart: ['', [Validators.required]],
+          allocationEnd: ['', [Validators.required]]
+        });
+      }
+    });
+  
 }
