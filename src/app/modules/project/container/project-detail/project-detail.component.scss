@@ -7,9 +7,17 @@ td {
 hr {
   border-width: 5px;
 }
+h5,
 h3,
 h4 {
   text-align: center;
+}
+.table-border {
+  table,
+  th,
+  td {
+    border: 1px solid black;
+  }
 }
 .label-location {
   background-color: #eeeeee;

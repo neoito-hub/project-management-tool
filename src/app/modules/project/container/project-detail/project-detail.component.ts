@@ -13,7 +13,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 @Component({
   selector: 'app-project-detail-container',
   templateUrl: './project-detail.component.html',
-  styleUrls: ['./project-detail.component.css']
+  styleUrls: ['./project-detail.component.scss']
 })
 export class ProjectDetailContainerComponent implements OnInit {
   bsModalRef: BsModalRef;
@@ -27,6 +27,7 @@ export class ProjectDetailContainerComponent implements OnInit {
   myForm;
   resource: any;
   selectedResource;
+  projectDocuments: any;
   constructor(
     private projectStore: Store<Project.ProjectState>,
     private resourceStore: Store<Resource.ResourceState>,
@@ -39,7 +40,6 @@ export class ProjectDetailContainerComponent implements OnInit {
     this.isEdit = false;
   }
   ngOnInit() {
-    console.log('heyyyyyyyyyyyyyyyyyyyyy', this.resource);
     let id = this.router.snapshot.paramMap.get('id');
     // this.resourceStore.dispatch(new Resource.LoadResourceAction());
     this.projectStore.dispatch(new Project.FindProject(id));
@@ -57,6 +57,10 @@ export class ProjectDetailContainerComponent implements OnInit {
     this.$projectdata.subscribe(v => {
       if (v) {
         this.projectdata = v;
+        if (v.documents) {
+          this.projectDocuments = v.documents;
+          console.log('project documents', this.projectDocuments);
+        }
       }
     });
     this.$projectResourcedata = this.projectStore.select(

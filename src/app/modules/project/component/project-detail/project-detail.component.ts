@@ -6,4 +6,6 @@ import { Router } from '@angular/router';
   selector: 'app-project-detail-component',
   templateUrl: './project-detail.component.html'
 })
-export class ProjectDetailComponent {}
+export class ProjectDetailComponent {
+  //  todo use this component
+}
