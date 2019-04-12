@@ -47,7 +47,7 @@
       value=""
       data-toggle="modal"
       data-target="#resources"
-      (click)="editResourcePopup(resource.id)"
+      (click)="editResourcePopup(resource.id, template)"
     >
       Edit
     </button>
@@ -61,7 +61,7 @@
   class="btn btn-primary"
   data-toggle="modal"
   data-target="#resources"
-  (click)="clearAndPatch()"
+  (click)="clearAndPatch(template)"
 >
   Allocate new Recources
 </button>
@@ -102,8 +102,96 @@
   </button>
 </div>
 
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Allocate new Resource</h4>
+    <button
+      type="button"
+      class="close pull-right"
+      aria-label="Close"
+      (click)="bsModalRef.hide()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="myForm" (ngSubmit)="onSubmitAllocation()">
+      <div class="modal-body">
+        <div class="form-group" *ngIf="!isEdit">
+          <label for="resource">Select Resource:</label>
+          <select
+            class="form-control"
+            formControlName="resourceId"
+            (click)="onChangeResource($event.target.value)"
+          >
+            <option
+              *ngFor="let resource of projectResourceList"
+              value="{{ resource.resourceId }}"
+            >
+              {{ resource.name }}
+            </option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="costPerHour">Cost Per Hour:</label>
+          <input
+            type="number"
+            class="form-control"
+            id="costPerHour"
+            placeholder="Cost Per Hour"
+            formControlName="costPerHour"
+          />
+        </div>
+        <div class="form-group">
+          <label for="hours">Hours:</label>
+          <input
+            type="number"
+            class="form-control"
+            id="hours"
+            placeholder="No of hours"
+            formControlName="hours"
+          />
+        </div>
+        <div class="form-group">
+          <label for="hours">Allocated from:</label>
+          <input
+            type="date"
+            class="form-control"
+            id="hours"
+            placeholder="No of hours"
+            formControlName="allocationStart"
+          />
+        </div>
+        <div class="form-group">
+          <label for="hours">Allocated to:</label>
+          <input
+            type="date"
+            class="form-control"
+            id="hours"
+            placeholder="No of hours"
+            formControlName="allocationEnd"
+          />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">
+          <span *ngIf="!isEdit">Allocate</span>
+          <span *ngIf="isEdit">Update Allocaton</span>
+        </button>
+        <button
+          type="button"
+          class="btn btn-danger "
+          (click)="bsModalRef.hide()"
+        >
+          Close
+        </button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
 <!-- modal Allocate Resources -->
-<div class="modal fade" id="resources" role="dialog">
+<!-- <div class="modal fade" id="resources" role="dialog">
   <div class="modal-dialog modal-md modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
@@ -182,4 +270,4 @@
       </form>
     </div>
   </div>
-</div>
+</div> -->

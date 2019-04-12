@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, TemplateRef } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Router, ActivatedRoute } from '@angular/router';
 import * as Project from '../../../../core/project';
@@ -121,11 +121,13 @@ export class ProjectDetailContainerComponent implements OnInit {
         this.projectStore.dispatch(
           new Project.AddResourceAllocationAction(this.myForm.value)
         );
+        this.bsModalRef.hide();
       }
       if (this.isEdit) {
         this.projectStore.dispatch(
           new Project.EditResourceAllocationAction(this.myForm.value)
         );
+        this.bsModalRef.hide();
         //this.modalService.hide();
       }
     }
@@ -141,31 +143,45 @@ export class ProjectDetailContainerComponent implements OnInit {
       }
     });
   }
-  editResourcePopup(id) {
+  editResourcePopup(id, template: TemplateRef<any>) {
     this.$projectResourcedata.subscribe(data => {
       if (data) {
         let res = data.find(res => res.id == id);
-        this.myForm.patchValue(res);
-        this.isEdit = true;
+        if (res) {
+          this.myForm.patchValue(res);
+
+          this.isEdit = true;
+        }
       }
     });
+    this.bsModalRef = this.modalService.show(template);
   }
   deleteLink(args: any) {
     console.log('delete-->args', args);
     let delDoc = this.projectDocuments.filter(v => v.url != args);
     console.log('delDoc', delDoc);
-    this.projectservice.addDocuments(delDoc, this.id);
+    this.projectservice.addDocuments(delDoc, this.id).subscribe(
+      v => {
+        if (v) {
+          console.log('v2', v);
+        }
+      },
+      error => {
+        console.log('error', error);
+      }
+    );
   }
   removeAllocation(resourceObj) {
     this.projectStore.dispatch(
       new Project.DeleteResourceAllocationAction(resourceObj)
     );
   }
-  clearAndPatch() {
+  clearAndPatch(template: TemplateRef<any>) {
     this.populateResourceDropdown();
     this.isEdit = false;
     this.myForm.reset();
     this.buildForm();
+    this.bsModalRef = this.modalService.show(template);
   }
   buildForm() {
     this.$projectdata.subscribe(v => {
