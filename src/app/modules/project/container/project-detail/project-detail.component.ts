@@ -9,11 +9,7 @@ import { map, catchError } from 'rxjs/operators';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { FileUploadComponent } from '../file-upload/file-upload.component';
 import { FormBuilder, Validators } from '@angular/forms';
-<<<<<<< HEAD
 import { ProjectService } from 'src/app/core/project/services';
-=======
-import { resource } from 'selenium-webdriver/http';
->>>>>>> a9abe43e7431391f9d2b66d847f968500b3a778d
 
 @Component({
   selector: 'app-project-detail-container',
@@ -66,13 +62,10 @@ export class ProjectDetailContainerComponent implements OnInit {
         this.projectdata = v;
         if (v.documents) {
           this.projectDocuments = v.documents;
-<<<<<<< HEAD
           console.log('project documents', this.projectDocuments);
         } else {
           this.projectDocuments = [];
-=======
           //console.log('project documents', this.projectDocuments);
->>>>>>> a9abe43e7431391f9d2b66d847f968500b3a778d
         }
       }
     });
@@ -190,5 +183,5 @@ export class ProjectDetailContainerComponent implements OnInit {
         });
       }
     });
-  
+  }
 }
