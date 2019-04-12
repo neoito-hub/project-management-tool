@@ -133,7 +133,7 @@ export class ProjectService {
   editProjectAllocation(payload: any): Observable<any> {
     const projectResourceRef = this.afStore
       .collection(`projects`)
-      .doc(`${payload.projectId}`)
+      .doc(payload.projectId)
       .collection('resources');
     return Observable.create(observer => {
       //console.log('Edit servive' + JSON.stringify(payload));
@@ -142,6 +142,27 @@ export class ProjectService {
         .update(payload)
         .then(res => {
           observer.next({ error: false, responce: res });
+        })
+        .catch(err => {
+          observer.next({ error: true });
+        });
+    });
+  }
+  //Delete Project service
+  deleteProjectAllocation(payload: any): Observable<any> {
+    const projectResourceRef = this.afStore
+      .collection(`projects`)
+      .doc(payload.projectId)
+      .collection('resources');
+    return Observable.create(observer => {
+      projectResourceRef
+        .doc(payload.id)
+        .delete()
+        .then(res => {
+          observer.next({
+            error: false,
+            responce: `Resource ${payload.id} deleted successfully`
+          });
         })
         .catch(err => {
           observer.next({ error: true });

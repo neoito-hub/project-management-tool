@@ -9,6 +9,7 @@ import { map, catchError } from 'rxjs/operators';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { FileUploadComponent } from '../file-upload/file-upload.component';
 import { FormBuilder, Validators } from '@angular/forms';
+import { resource } from 'selenium-webdriver/http';
 
 @Component({
   selector: 'app-project-detail-container',
@@ -73,25 +74,20 @@ export class ProjectDetailContainerComponent implements OnInit {
     });
 
     this.resourceService.getResourceList().subscribe(data => {
-      this.projectResourceList = data;
+      //this.projectResourceList = data;
+      let allocatedData = this.projectResourcedata;
+      let excludeIds = allocatedData.map(data => {
+        return data.resourceId;
+      });
+      console.log('excl', excludeIds);
+      this.projectResourceList = data.filter(item => {
+        console.log('item', item);
+        return excludeIds.indexOf(item.resourceId) == -1;
+      });
     });
 
     if (!this.isEdit) {
-      this.$projectdata.subscribe(v => {
-        if (v) {
-          this.projectdata = v;
-          this.myForm = this._fb.group({
-            id: '',
-            projectId: [this.projectdata.projectId],
-            resourceId: '',
-            name: [''],
-            costPerHour: ['', [Validators.required]],
-            hours: ['', [Validators.required]],
-            allocationStart: ['', [Validators.required]],
-            allocationEnd: ['', [Validators.required]]
-          });
-        }
-      });
+      this.buildForm();
     }
   }
 
@@ -122,11 +118,7 @@ export class ProjectDetailContainerComponent implements OnInit {
         this.projectStore.dispatch(
           new Project.EditResourceAllocationAction(this.myForm.value)
         );
-        this.isEdit = false;
-        let patchId = this.myForm.value.projectId;
-        this.myForm.reset();
-        this.myForm.patchValue({ projectId: patchId });
-        this.isEdit = false;
+        //this.modalService.hide();
       }
     }
 
@@ -147,6 +139,32 @@ export class ProjectDetailContainerComponent implements OnInit {
         let res = data.find(res => res.id == id);
         this.myForm.patchValue(res);
         this.isEdit = true;
+      }
+    });
+  }
+  removeAllocation(resourceObj) {
+    this.projectStore.dispatch(
+      new Project.DeleteResourceAllocationAction(resourceObj)
+    );
+  }
+  clearAndPatch() {
+    this.isEdit = false;
+    this.myForm.reset();
+  }
+  buildForm() {
+    this.$projectdata.subscribe(v => {
+      if (v) {
+        this.projectdata = v;
+        this.myForm = this._fb.group({
+          id: '',
+          projectId: [this.projectdata.projectId],
+          resourceId: '',
+          name: [''],
+          costPerHour: ['', [Validators.required]],
+          hours: ['', [Validators.required]],
+          allocationStart: ['', [Validators.required]],
+          allocationEnd: ['', [Validators.required]]
+        });
       }
     });
   }

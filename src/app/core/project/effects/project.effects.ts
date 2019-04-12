@@ -139,8 +139,8 @@ export class ProjectEffects {
   @Effect()
   editProjectAllocation$ = this.actions.pipe(
     ofType(fromProjectActions.EDIT_RESOURCE_ALLOCATION),
-    switchMap((action: fromProjectActions.EditProject) => {
-      console.log('payload in our edit effect', action.payload);
+    switchMap((action: fromProjectActions.EditResourceAllocationAction) => {
+      //console.log('payload in our edit effect', action.payload);
       return this.fromProjectServices
         .editProjectAllocation(action.payload)
         .pipe(
@@ -154,6 +154,32 @@ export class ProjectEffects {
             // console.log(error);
             return of(
               new fromProjectActions.EditResourceAllocationError(error)
+            );
+          })
+        );
+    })
+  );
+
+  //Delete project resource
+  @Effect()
+  deleteProjectAllocation$ = this.actions.pipe(
+    ofType(fromProjectActions.DELETE_RESOURCE_ALLOCATION),
+    switchMap((action: fromProjectActions.DeleteResourceAllocationAction) => {
+      console.log('payload in our edit effect', action.payload);
+      return this.fromProjectServices
+        .deleteProjectAllocation(action.payload)
+        .pipe(
+          map(data => {
+            console.log('Res>>>>>>>>>>', data);
+            return new fromProjectActions.DeleteResourceAllocationSuccess(data);
+          }),
+          tap(() => {
+            // this.router.navigate([`projects/detail/${action.payload.projectId}`]);
+          }),
+          catchError(error => {
+            // console.log(error);
+            return of(
+              new fromProjectActions.DeleteResourceAllocationError(error)
             );
           })
         );
