@@ -9,6 +9,8 @@ import { tap } from 'rxjs/operators';
 import { finalize } from 'rxjs/operators';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { ProjectService } from 'src/app/core/project/services';
+import { Store } from '@ngrx/store';
+import * as Project from '../../../../core/project';
 
 @Component({
   selector: 'file-upload',
@@ -36,13 +38,24 @@ export class FileUploadComponent {
   downloadURL$: Observable<string>;
   docUrl: string;
   file: any;
+  project$: Observable<Object>;
+  documents: any[] = [];
 
   constructor(
     private storage: AngularFireStorage,
     public bsModalRef: BsModalRef,
     private db: AngularFirestore,
-    private projectService: ProjectService
-  ) {}
+    private projectService: ProjectService,
+    public _store: Store<any>
+  ) {
+    this.project$ = this._store.select(Project.getDocuments);
+    this.project$.subscribe((v: any) => {
+      if (v) {
+        this.documents = v;
+        console.log('our documents', this.documents);
+      }
+    });
+  }
 
   toggleHover(event: boolean) {
     this.isHovering = event;
@@ -97,8 +110,14 @@ export class FileUploadComponent {
               console.log('docUrl ', this.docUrl);
               console.log('data->>>', this.docUrl, this.name);
               if (this.docUrl && this.name && this.projectID) {
+                let obj = {
+                  name: this.name,
+                  url: this.docUrl,
+                  firebasename: path
+                };
+                this.documents.push(obj);
                 this.projectService
-                  .addDocuments(this.docUrl, this.name, this.projectID)
+                  .addDocuments(this.documents, this.projectID)
                   .subscribe(
                     v => {
                       if (v) {

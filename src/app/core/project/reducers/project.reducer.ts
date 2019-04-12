@@ -8,6 +8,7 @@ export interface ProjectState {
   error: boolean;
   count: number;
   projectResources: any[];
+  documents: any[];
   //singleResource: Object;
 }
 
@@ -17,7 +18,8 @@ export const initialState: ProjectState = {
   isLoading: false,
   error: false,
   count: 0,
-  projectResources: []
+  projectResources: [],
+  documents: []
   //singleResource:{}
 };
 
@@ -78,6 +80,7 @@ export function ProjectReducer(
       return {
         ...state,
         selectedProject: action.payload,
+        documents: action.payload.documents,
         isLoading: false
       };
     }
@@ -195,3 +198,4 @@ export const getProjectResources = (state: ProjectState) =>
   state.projectResources;
 export const getSelectedProject = (state: ProjectState) =>
   state.selectedProject;
+export const getProjectDocuments = (state: ProjectState) => state.documents;

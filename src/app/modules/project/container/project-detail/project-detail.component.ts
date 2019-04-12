@@ -9,6 +9,7 @@ import { map, catchError } from 'rxjs/operators';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { FileUploadComponent } from '../file-upload/file-upload.component';
 import { FormBuilder, Validators } from '@angular/forms';
+import { ProjectService } from 'src/app/core/project/services';
 
 @Component({
   selector: 'app-project-detail-container',
@@ -27,7 +28,8 @@ export class ProjectDetailContainerComponent implements OnInit {
   myForm;
   resource: any;
   selectedResource;
-  projectDocuments: any;
+  projectDocuments: any[];
+  id: string;
   constructor(
     private projectStore: Store<Project.ProjectState>,
     private resourceStore: Store<Resource.ResourceState>,
@@ -35,15 +37,16 @@ export class ProjectDetailContainerComponent implements OnInit {
     private route: Router,
     private resourceService: ResourceService,
     private modalService: BsModalService,
-    private _fb: FormBuilder
+    private _fb: FormBuilder,
+    private projectservice: ProjectService
   ) {
     this.isEdit = false;
   }
   ngOnInit() {
-    let id = this.router.snapshot.paramMap.get('id');
+    this.id = this.router.snapshot.paramMap.get('id');
     // this.resourceStore.dispatch(new Resource.LoadResourceAction());
-    this.projectStore.dispatch(new Project.FindProject(id));
-    this.projectStore.dispatch(new Project.GetProjectResources(id));
+    this.projectStore.dispatch(new Project.FindProject(this.id));
+    this.projectStore.dispatch(new Project.GetProjectResources(this.id));
     // this.$projectResourceList = this.resourceStore.select(
     //   Resource.getAllResources
     // );
@@ -60,6 +63,8 @@ export class ProjectDetailContainerComponent implements OnInit {
         if (v.documents) {
           this.projectDocuments = v.documents;
           console.log('project documents', this.projectDocuments);
+        } else {
+          this.projectDocuments = [];
         }
       }
     });
@@ -149,5 +154,11 @@ export class ProjectDetailContainerComponent implements OnInit {
         this.isEdit = true;
       }
     });
+  }
+  deleteLink(args: any) {
+    console.log('delete-->args', args);
+    let delDoc = this.projectDocuments.filter(v => v.url != args);
+    console.log('delDoc', delDoc);
+    this.projectservice.addDocuments(delDoc, this.id);
   }
 }

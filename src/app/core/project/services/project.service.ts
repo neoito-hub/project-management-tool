@@ -84,17 +84,17 @@ export class ProjectService {
       .valueChanges();
   }
 
-  addDocuments(x, y, z): Observable<any> {
-    // console.log('got oitttttttttttttttttttttttt', x, y, z);
+  addDocuments(x, y): any {
+    console.log('got oitttttttttttttttttttttttt', x, y);
     const projectRef = this.afStore.collection('projects');
-    let obj = { name: y, url: x };
-    this.arr.push(obj);
-    // console.log('arrrrrrrrrrrrrrrrrrrrrr', this.arr);
+    // let obj = { name: y, url: x };
+    // this.arr.push(obj);
+    // // console.log('arrrrrrrrrrrrrrrrrrrrrr', this.arr);
     return Observable.create(observer => {
       //console.log('Edit servive' + JSON.stringify(payload));
       projectRef
-        .doc(z)
-        .update({ documents: this.arr })
+        .doc(y)
+        .update({ documents: x })
         .then(res => {
           // console.log('nammude res', res);
           observer.next({ error: false, responce: 'Sucess' });

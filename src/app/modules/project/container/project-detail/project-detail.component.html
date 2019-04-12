@@ -68,12 +68,18 @@
       <th>No</th>
       <th>Name</th>
       <th>link</th>
+      <th>Action</th>
     </tr>
     <tr *ngFor="let doc of projectDocuments; let i = index">
       <td>{{ i + 1 }}</td>
       <td>{{ doc.name }}</td>
       <td>
         <a href="{{ doc.url }}" target="_blank" style="color: green;">link</a>
+      </td>
+      <td>
+        <button class="btn btn-danger" (click)="deleteLink(doc.url)">
+          Delete
+        </button>
       </td>
     </tr>
   </table>
