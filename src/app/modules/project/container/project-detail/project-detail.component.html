@@ -79,7 +79,13 @@
       <td>{{ i + 1 }}</td>
       <td>{{ doc.name }}</td>
       <td>
-        <a href="{{ doc.url }}" target="_blank" style="color: green;">link</a>
+        <a
+          href="{{ doc.url }}"
+          target="_blank"
+          style="color: green;"
+          download="image.jpg"
+          >Download</a
+        >
       </td>
       <td>
         <button class="btn btn-danger" (click)="deleteLink(doc)">

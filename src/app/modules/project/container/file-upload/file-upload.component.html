@@ -10,6 +10,12 @@
   </button>
 </div>
 <div class="modal-body">
+  <input
+    type="text"
+    class="form-control mb-1"
+    placeholder="Type a filename"
+    (input)="namechanged($event.target.value)"
+  />
   <div
     class="dropzone"
     dropZone
@@ -34,12 +40,6 @@
       </label>
     </div>
   </div>
-  <input
-    type="text"
-    class="form-control mb-1"
-    placeholder="Type here"
-    (input)="namechanged($event.target.value)"
-  />
 
   <div *ngIf="(percentage | async) as pct">
     <progress class="progress is-info" [value]="pct" max="100"> </progress>

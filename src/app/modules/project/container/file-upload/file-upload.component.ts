@@ -75,7 +75,7 @@ export class FileUploadComponent {
     // const file = event.item(0);
     // console.log('file ->>>', this.file);
     if (!this.name) {
-      alert('Please type project name to upload');
+      alert('Please type a file name before upload');
       return;
     }
     // Client-side validation example
