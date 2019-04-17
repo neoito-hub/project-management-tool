@@ -99,9 +99,6 @@ export class ProjectDetailContainerComponent implements OnInit {
       });
     });
   }
-  goBack() {
-    this.route.navigate(['/projects']);
-  }
   uploadDoc(args: any) {
     console.log('argsss=>', args);
     const initialState = {
@@ -159,33 +156,37 @@ export class ProjectDetailContainerComponent implements OnInit {
   }
   deleteLink(args: any) {
     console.log('delete-->args', args);
-    let delDoc = this.projectDocuments.filter(v => v.url != args.url);
-    console.log('delDoc', delDoc);
-    this.projectservice.addDocuments(delDoc, this.id).subscribe(
-      v => {
-        if (v) {
-          console.log('v2', v);
-          let storageRef = firebase.storage().ref();
-          storageRef
-            .child(`${args.firebasename}`)
-            .delete()
-            .then(res => {
-              alert('deleted');
-            })
-            .catch(error => {
-              alert('error in deleting bucket');
-            });
+    if (window.confirm('Do you really want to Delete?')) {
+      let delDoc = this.projectDocuments.filter(v => v.url != args.url);
+      console.log('delDoc', delDoc);
+      this.projectservice.addDocuments(delDoc, this.id).subscribe(
+        v => {
+          if (v) {
+            console.log('v2', v);
+            let storageRef = firebase.storage().ref();
+            storageRef
+              .child(`${args.firebasename}`)
+              .delete()
+              .then(res => {
+                alert('deleted');
+              })
+              .catch(error => {
+                alert('error in deleting bucket');
+              });
+          }
+        },
+        error => {
+          console.log('error', error);
         }
-      },
-      error => {
-        console.log('error', error);
-      }
-    );
+      );
+    }
   }
   removeAllocation(resourceObj) {
-    this.projectStore.dispatch(
-      new Project.DeleteResourceAllocationAction(resourceObj)
-    );
+    if (window.confirm('Do you really want to remove this resource?')) {
+      this.projectStore.dispatch(
+        new Project.DeleteResourceAllocationAction(resourceObj)
+      );
+    }
   }
   clearAndPatch(template: TemplateRef<any>) {
     this.populateResourceDropdown();
