@@ -10,6 +10,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { FileUploadComponent } from '../file-upload/file-upload.component';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ProjectService } from 'src/app/core/project/services';
+import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'app-project-detail-container',
@@ -158,12 +159,22 @@ export class ProjectDetailContainerComponent implements OnInit {
   }
   deleteLink(args: any) {
     console.log('delete-->args', args);
-    let delDoc = this.projectDocuments.filter(v => v.url != args);
+    let delDoc = this.projectDocuments.filter(v => v.url != args.url);
     console.log('delDoc', delDoc);
     this.projectservice.addDocuments(delDoc, this.id).subscribe(
       v => {
         if (v) {
           console.log('v2', v);
+          let storageRef = firebase.storage().ref();
+          storageRef
+            .child(`${args.firebasename}`)
+            .delete()
+            .then(res => {
+              alert('deleted');
+            })
+            .catch(error => {
+              alert('error in deleting bucket');
+            });
         }
       },
       error => {

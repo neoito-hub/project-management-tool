@@ -11,6 +11,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 import { ProjectService } from 'src/app/core/project/services';
 import { Store } from '@ngrx/store';
 import * as Project from '../../../../core/project';
+import { randomString } from '../../../../shared/utils';
 
 @Component({
   selector: 'file-upload',
@@ -84,8 +85,8 @@ export class FileUploadComponent {
     // }
 
     // The storage path
-
-    const path = `Documents/${this.projectID}_${this.file.name}`;
+    const randName = randomString();
+    const path = `Documents/${this.projectID}/${randName}_${this.file.name}`;
     console.log('path', path);
     // Totally optional metadata
     // const customMetadata = { app: 'My AngularFire-powered PWA!' };
