@@ -18,14 +18,14 @@
     <td>{{ resource?.upwork }}</td>
     <div class="btn-group">
       <button
-        class="btn btn-sm btn-edit btn-white mr-0 editbtn-margin"
+        class="btn btn-sm btn-primary"
         [routerLink]="['/resource-edit/' + resource?.resourceId]"
         (click)="clickEdit()"
       >
         Edit
       </button>
       <button
-        class="btn btn-sm btn-edit btn-white mr-0 editbtn-margin"
+        class="btn btn-sm btn-danger"
         (click)="clickDelete(resource.resourceId)"
         data-toggle="modal"
         data-target="#deleteModal"
