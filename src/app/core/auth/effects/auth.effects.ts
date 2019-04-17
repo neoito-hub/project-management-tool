@@ -25,7 +25,7 @@ export class AuthEffects {
       return this.fromAuthServices.getUserData(action.payload).pipe(
         map(data => {
           //console.log(data);
-          this.router.navigate(['dashboard']);
+          this.router.navigate(['projects']);
           return new fromAuthActions.LoginSuccess(data);
         }),
         catchError(error => {

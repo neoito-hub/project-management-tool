@@ -8,7 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class ListProjectComponent implements OnInit {
   @Input()
   projects: any;
-  status = ['On Hold', 'In Progress', 'Completed', 'Closed'];
+  status = ['In Progress', 'On Hold', 'Completed', 'Closed'];
   constructor() {}
 
   ngOnInit() {}

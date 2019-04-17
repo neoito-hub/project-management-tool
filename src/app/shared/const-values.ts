@@ -245,8 +245,8 @@ export const countries = [
 ];
 
 export const projectStatusList = [
-  { statusCode: '0', status: 'On Hold' },
-  { statusCode: '1', status: 'In Progress' },
+  { statusCode: '0', status: 'In Progress' },
+  { statusCode: '1', status: 'On Hold' },
   { statusCode: '2', status: 'Completed' },
   { statusCode: '3', status: 'Closed' }
 ];

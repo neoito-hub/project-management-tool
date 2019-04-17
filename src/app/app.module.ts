@@ -17,9 +17,10 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { DropZoneDirective } from './drop-zone.directive';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { FileSizePipe } from './shared/file-size.pipe';
+import { SidebarComponent } from './modules/layout/sidebar/sidebar.component';
 
 @NgModule({
-  declarations: [AppComponent, DropZoneDirective, FileSizePipe],
+  declarations: [AppComponent, DropZoneDirective, FileSizePipe, SidebarComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

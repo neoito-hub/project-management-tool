@@ -1,12 +1,14 @@
+<h3>Resource List</h3>
 <table>
   <tr>
-    <th>bitbucket</th>
-    <th>email</th>
-    <th>experience</th>
-    <th>github</th>
-    <th>gitlab</th>
-    <th>name</th>
-    <th>upwork</th>
+    <th>Bitbucket</th>
+    <th>Email</th>
+    <th>Gxperience</th>
+    <th>Github</th>
+    <th>Gitlab</th>
+    <th>Name</th>
+    <th>Upwork</th>
+    <th>Actions</th>
   </tr>
   <tr *ngFor="let resource of resources">
     <td>{{ resource?.bitbucket }}</td>
@@ -16,7 +18,7 @@
     <td>{{ resource?.gitlab }}</td>
     <td>{{ resource?.name }}</td>
     <td>{{ resource?.upwork }}</td>
-    <div class="btn-group">
+    <div class="btn-group btn-block">
       <button
         class="btn btn-sm btn-primary"
         [routerLink]="['/resource-edit/' + resource?.resourceId]"

@@ -1,3 +1,4 @@
+<h3>Project List</h3>
 <table>
   <tr>
     <th>Project Name</th>
@@ -7,6 +8,7 @@
     <th>Email</th>
     <th>Status</th>
     <th>Start Date</th>
+    <th>Actions</th>
   </tr>
   <tr *ngFor="let project of projects">
     <td>{{ project?.projectName }}</td>
@@ -17,7 +19,7 @@
     <td>{{ status[(project?.status)] }}</td>
     <td>{{ project?.startDate | date }}</td>
 
-    <div class="btn-group">
+    <div class="btn-group btn-block">
       <button
         class="btn btn-success"
         [routerLink]="['/projects/edit', project.projectId]"
