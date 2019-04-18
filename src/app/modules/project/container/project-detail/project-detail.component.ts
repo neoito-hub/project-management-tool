@@ -26,6 +26,7 @@ export class ProjectDetailContainerComponent implements OnInit {
   projectResourcedata: any;
   projectResourceList: any;
   isEdit: boolean;
+  submitFlag: boolean;
   myForm;
   resource: any;
   selectedResource;
@@ -84,6 +85,11 @@ export class ProjectDetailContainerComponent implements OnInit {
     if (!this.isEdit) {
       this.buildForm();
     }
+    if (this.isEdit) {
+      this.submitFlag = true;
+    } else {
+      this.submitFlag = false;
+    }
   }
   populateResourceDropdown() {
     this.resourceService.getResourceList().subscribe(data => {
@@ -111,8 +117,9 @@ export class ProjectDetailContainerComponent implements OnInit {
     this.bsModalRef.content.closeBtnName = 'Close';
   }
   onSubmitAllocation() {
+    this.submitFlag = true;
     if (!this.myForm.valid) {
-      alert('Make sure all feilds are filled');
+      alert('Validation Error');
     } else {
       if (!this.isEdit) {
         //console.log(this.myForm.value);
@@ -202,7 +209,7 @@ export class ProjectDetailContainerComponent implements OnInit {
         this.myForm = this._fb.group({
           id: '',
           projectId: [this.projectdata.projectId],
-          resourceId: '',
+          resourceId: ['', [Validators.required]],
           name: [''],
           costPerHour: ['', [Validators.required]],
           hours: ['', [Validators.required]],
@@ -211,5 +218,8 @@ export class ProjectDetailContainerComponent implements OnInit {
         });
       }
     });
+  }
+  get f() {
+    return this.myForm.controls;
   }
 }

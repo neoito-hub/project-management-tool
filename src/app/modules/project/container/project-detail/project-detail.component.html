@@ -130,6 +130,9 @@
               {{ resource.name }}
             </option>
           </select>
+          <span class="text-danger" *ngIf="submitFlag && f.resourceId.errors"
+            >*required feild
+          </span>
         </div>
         <div class="form-group">
           <label for="costPerHour">Cost Per Hour:</label>
@@ -140,6 +143,9 @@
             placeholder="Cost Per Hour"
             formControlName="costPerHour"
           />
+          <span class="text-danger" *ngIf="submitFlag && f.costPerHour.errors"
+            >*required feild
+          </span>
         </div>
         <div class="form-group">
           <label for="hours">Hours:</label>
@@ -150,6 +156,9 @@
             placeholder="No of hours"
             formControlName="hours"
           />
+          <span class="text-danger" *ngIf="submitFlag && f.hours.errors"
+            >*required feild
+          </span>
         </div>
         <div class="form-group">
           <label for="hours">Allocated from:</label>
@@ -159,7 +168,12 @@
             id="hours"
             placeholder="No of hours"
             formControlName="allocationStart"
-          />
+            max="{{ myForm.value.allocationEnd }}"
+          /><span
+            class="text-danger"
+            *ngIf="submitFlag && f.allocationStart.errors"
+            >*required feild
+          </span>
         </div>
         <div class="form-group">
           <label for="hours">Allocated to:</label>
@@ -169,7 +183,12 @@
             id="hours"
             placeholder="No of hours"
             formControlName="allocationEnd"
-          />
+            min="{{ myForm.value.allocationStart }}"
+          /><span
+            class="text-danger"
+            *ngIf="submitFlag && f.allocationEnd.errors"
+            >*required feild
+          </span>
         </div>
       </div>
       <div class="modal-footer">

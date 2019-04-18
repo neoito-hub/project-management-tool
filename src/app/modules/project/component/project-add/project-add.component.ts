@@ -31,6 +31,7 @@ export class ProjectAddComponent implements OnInit {
   @Output()
   formValue = new EventEmitter();
   value;
+  submitFlag: boolean;
 
   constructor(private _fb: FormBuilder, private router: Router) {
     // this.myForm = this._fb.group({
@@ -57,6 +58,11 @@ export class ProjectAddComponent implements OnInit {
         startDate: ['', [Validators.required]],
         status: ['', [Validators.required]]
       });
+    }
+    if (this.isEdit) {
+      this.submitFlag = true;
+    } else {
+      this.submitFlag = false;
     }
   }
 
@@ -96,11 +102,16 @@ export class ProjectAddComponent implements OnInit {
     //let formDate = this.value.startDate;
     //let timestamp = this.formatToTimestamp(formDate);
     //this.myForm.patchValue({ startDate: timestamp });
-
+    this.submitFlag = true;
     this.value = this.myForm.value;
-    this.formValue.emit(this.value);
+    if (this.myForm.valid) {
+      this.formValue.emit(this.value);
+    }
   }
   onCancel() {
     this.router.navigate(['/projects']);
+  }
+  get f() {
+    return this.myForm.controls;
   }
 }

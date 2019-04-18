@@ -18,6 +18,7 @@ export class ResourceAddComponent implements OnInit {
   @Output()
   updatedValue = new EventEmitter();
   selectedData$: any;
+  submitFlag: boolean;
 
   constructor(
     private _store: Store<any>,
@@ -35,6 +36,7 @@ export class ResourceAddComponent implements OnInit {
 
     if (localStorage.getItem('resourceClick') === 'EDIT') {
       this.navButton = 'Update';
+      this.submitFlag = true;
       this._store.dispatch(new Resource.FindResourceAction(this.res_id));
       this.selectedData$ = this._store.select(Resource.getSelectedResources1);
       this.selectedData$.subscribe((v: any) => {
@@ -44,6 +46,7 @@ export class ResourceAddComponent implements OnInit {
       });
     } else {
       this.navButton = 'Add';
+      this.submitFlag = false;
     }
   }
 
@@ -52,28 +55,37 @@ export class ResourceAddComponent implements OnInit {
     // this._store.dispatch(
     //   new Resource.AddResourceAction(this.registerForm.value)
     // );
-    if (localStorage.getItem('resourceClick') === 'ADD') {
-      this.submittedValue.emit(this.registerForm.value);
+    this.submitFlag = true;
+    if (this.registerForm.valid) {
+      if (localStorage.getItem('resourceClick') === 'ADD') {
+        this.submittedValue.emit(this.registerForm.value);
+      } else {
+        let updateValue = this.registerForm.value;
+        let payload = { data: updateValue, id: this.res_id };
+        this.updatedValue.emit(payload);
+      }
     } else {
-      let updateValue = this.registerForm.value;
-      let payload = { data: updateValue, id: this.res_id };
-      this.updatedValue.emit(payload);
+      alert('Validation Error');
     }
   }
 
   buildForm() {
     this.registerForm = this.formBuilder.group({
-      bitbucket: [''],
-      email: [''],
-      experience: [''],
+      bitbucket: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      experience: ['', [Validators.required]],
       github: [''],
       gitlab: [''],
-      name: [''],
+      name: ['', [Validators.required]],
       upwork: ['']
     });
   }
 
   cancel() {
     this.router.navigate(['resource-list']);
+  }
+
+  get f() {
+    return this.registerForm.controls;
   }
 }

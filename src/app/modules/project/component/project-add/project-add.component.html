@@ -12,6 +12,9 @@
             formControlName="projectName"
             class="form-control"
           />
+          <span class="text-danger" *ngIf="submitFlag && f.projectName.errors"
+            >*required feild <br
+          /></span>
 
           <label>Client Name</label>
           <input
@@ -19,6 +22,9 @@
             formControlName="clientName"
             class="form-control"
           />
+          <span class="text-danger" *ngIf="submitFlag && f.clientName.errors"
+            >*required feild <br
+          /></span>
 
           <label>Country</label>
           <select class="form-control" id="country" formControlName="country">
@@ -26,15 +32,24 @@
               country.name
             }}</option>
           </select>
+          <span class="text-danger" *ngIf="submitFlag && f.country.errors"
+            >*required feild <br
+          /></span>
 
           <label>email</label>
           <input type="text" formControlName="email" class="form-control" />
+          <span class="text-danger" *ngIf="submitFlag && f.email.errors"
+            >*invalid Email <br
+          /></span>
 
           <label>Skype ID</label>
           <input type="text" formControlName="skypeId" class="form-control" />
 
           <label>Start Date</label>
           <input type="date" formControlName="startDate" class="form-control" />
+          <span class="text-danger" *ngIf="submitFlag && f.startDate.errors"
+            >*required feild <br
+          /></span>
 
           <label>status</label>
           <select class="form-control" id="status" formControlName="status">
@@ -44,6 +59,9 @@
               >{{ status.status }}</option
             >
           </select>
+          <span class="text-danger" *ngIf="submitFlag && f.status.errors"
+            >*required feild <br
+          /></span>
 
           <button
             type="submit"
