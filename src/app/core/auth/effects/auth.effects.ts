@@ -29,7 +29,7 @@ export class AuthEffects {
           return new fromAuthActions.LoginSuccess(data);
         }),
         catchError(error => {
-          //console.log(error);
+          alert(error.message);
           return of(new fromAuthActions.LoginFail());
         })
       );

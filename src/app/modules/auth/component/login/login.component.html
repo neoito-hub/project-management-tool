@@ -1,18 +1,22 @@
 <div class="login">
-  <h2>Login Form</h2>
+  <h2>Admin Login</h2>
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <div class="imgcontainer">
       <img [src]="avatar" alt="Avatar" class="avatar" />
     </div>
 
     <div class="container">
-      <label for="email"><b>Username</b></label>
+      <label for="email"><b>Email</b></label>
       <input
         type="email"
         placeholder="Enter Email"
         formControlName="email"
         required
+        (change)="valueChange()"
       />
+      <span class="text-danger" *ngIf="changeFlag && f.email.errors"
+        >*invalid email<br
+      /></span>
 
       <label for="password"><b>Password</b></label>
       <input
