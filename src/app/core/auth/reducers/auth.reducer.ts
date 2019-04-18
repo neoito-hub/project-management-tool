@@ -44,6 +44,8 @@ export function AuthReducer(
         data: [{ Message: 'Logged out successfully' }]
       };
     }
+    default:
+      return { ...state };
   }
   // return state;
 }

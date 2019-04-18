@@ -70,7 +70,7 @@ export class ProjectEffects {
     switchMap((action: fromProjectActions.GetProjectResources) => {
       return this.fromProjectServices.getProjectDetail(action.payload).pipe(
         map(data => {
-          console.log('inside add project detail effect', data);
+          //console.log('inside add project detail effect', data);
           return new fromProjectActions.GetProjectResourcesSuccess(data);
         }),
         catchError(error => {

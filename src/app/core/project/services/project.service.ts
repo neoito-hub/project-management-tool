@@ -76,7 +76,7 @@ export class ProjectService {
   }
 
   getProjectDetail(payload: any): Observable<any> {
-    console.log('payload =>>>>', payload);
+    //console.log('payload =>>>>', payload);
     return this.afStore
       .collection('projects')
       .doc(payload)
@@ -85,7 +85,7 @@ export class ProjectService {
   }
 
   addDocuments(x, y): any {
-    console.log('got oitttttttttttttttttttttttt', x, y);
+    //console.log('got oitttttttttttttttttttttttt', x, y);
     const projectRef = this.afStore.collection('projects');
     // let obj = { name: y, url: x };
     // this.arr.push(obj);

@@ -210,6 +210,8 @@ export function ProjectReducer(
         error: true
       };
     }
+    default:
+      return { ...state };
   }
 }
 export const getProjects = (state: ProjectState) => state.projectList;
