@@ -1,5 +1,4 @@
 import * as fromProjectActions from '../actions';
-import { ProjectAction } from '../actions';
 import { Project } from '../models/project.model';
 
 export interface ProjectState {
@@ -10,7 +9,6 @@ export interface ProjectState {
   count: number;
   projectResources: any[];
   documents: any[];
-  //singleResource: Object;
 }
 
 export const initialState: ProjectState = {
@@ -21,7 +19,6 @@ export const initialState: ProjectState = {
   count: 0,
   projectResources: [],
   documents: []
-  //singleResource:{}
 };
 
 export function ProjectReducer(
@@ -31,14 +28,12 @@ export function ProjectReducer(
   // State interface
   switch (action.type) {
     case fromProjectActions.LOAD_PROJECT: {
-      //console.log(`inside load acton`);
       return {
         ...state,
         isLoading: true
       };
     }
     case fromProjectActions.LOAD_PROJECT_SUCCESS: {
-      //console.log(`inside load acton success`);
       return {
         ...state,
         projectList: action.payload,
@@ -151,7 +146,7 @@ export function ProjectReducer(
         error: true
       };
     }
-    //Add REsource Allocation
+    //Add Resource Allocation
     case fromProjectActions.ADD_RESOURCE_ALLOCATION: {
       return {
         ...state,
@@ -171,7 +166,7 @@ export function ProjectReducer(
         error: true
       };
     }
-    //Edit REsource Allocation
+    //Edit Resource Allocation
     case fromProjectActions.EDIT_RESOURCE_ALLOCATION: {
       return {
         ...state,
@@ -191,7 +186,7 @@ export function ProjectReducer(
         error: true
       };
     }
-    //Delete REsource Allocation
+    //Delete Resource Allocation
     case fromProjectActions.DELETE_RESOURCE_ALLOCATION: {
       return {
         ...state,

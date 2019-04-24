@@ -49,7 +49,8 @@ import {
   DeleteResourceAllocationError
 } from './delete-project-resource.action';
 
-// actions dispatchers
+// For a module there are multiple actions handled in the reducer.
+// These are of the type as indexed in here as ProjectAction
 export type ProjectAction =
   | LoadProjectAction
   | LoadProjectActionError
@@ -82,6 +83,8 @@ export type ProjectAction =
   | DeleteResourceAllocationSuccess
   | DeleteResourceAllocationError;
 
+// All the ActionTypes of the projects store are exported from the index to be
+// used in the reducer and the effects
 export * from './load-all-projects.action';
 export * from './add-project.action';
 export * from './edit-project.action';

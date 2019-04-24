@@ -13,6 +13,8 @@ export * from './find-resource.effect';
 export * from './load-resource.effect';
 export * from './update-resource.effect';
 
+// All the effects can be exported from the index to be used
+// in the core module feature effects declaration
 export const ResourceEffect = [
   AddResourceEffect,
   DeleteResourceEffect,

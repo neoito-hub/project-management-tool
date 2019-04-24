@@ -23,7 +23,6 @@ export class AddResourceAllocationEffects {
     switchMap((action: fromProjectActions.AddResourceAllocationAction) => {
       return this.fromProjectServices.addProjectAllocation(action.payload).pipe(
         map(data => {
-          console.log('inside add project Allocation effect', data);
           return new fromProjectActions.AddResourceAllocationSuccess(data);
         }),
         catchError(error => {

@@ -1,13 +1,9 @@
 import { Injectable } from '@angular/core';
-//public afAuth: AngularFireAuth, public router: Routerimport { User } from '../models/user.model';
-import { of, Observable, observable } from 'rxjs';
-import { from } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { auth } from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
-import { map, catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -23,11 +19,9 @@ export class ProjectService {
   loadProjects(): Observable<any> {
     return this.afStore
       .collection('/projects', ref => {
-        //console.log(`Firebase response: ${ref}`);
         return ref;
       })
       .valueChanges();
-    // console.log(`Firebase response: ${result}`);
   }
   addProject(payload: any): any {
     const projectRef = this.afStore.collection('projects');
@@ -58,11 +52,9 @@ export class ProjectService {
       .valueChanges();
   }
 
-  //Edit Project service
   editProject(payload: any): Observable<any> {
     const projectRef = this.afStore.collection('projects');
     return Observable.create(observer => {
-      //console.log('Edit servive' + JSON.stringify(payload));
       projectRef
         .doc(payload.projectId)
         .update(payload)
@@ -76,7 +68,6 @@ export class ProjectService {
   }
 
   getProjectDetail(payload: any): Observable<any> {
-    //console.log('payload =>>>>', payload);
     return this.afStore
       .collection('projects')
       .doc(payload)
@@ -85,18 +76,12 @@ export class ProjectService {
   }
 
   addDocuments(x, y): any {
-    //console.log('got oitttttttttttttttttttttttt', x, y);
     const projectRef = this.afStore.collection('projects');
-    // let obj = { name: y, url: x };
-    // this.arr.push(obj);
-    // // console.log('arrrrrrrrrrrrrrrrrrrrrr', this.arr);
     return Observable.create(observer => {
-      //console.log('Edit servive' + JSON.stringify(payload));
       projectRef
         .doc(y)
         .update({ documents: x })
         .then(res => {
-          // console.log('nammude res', res);
           observer.next({ error: false, responce: 'Sucess' });
         })
         .catch(err => {
@@ -104,7 +89,6 @@ export class ProjectService {
         });
     });
   }
-  //To add new resources
   addProjectAllocation(payload: any): Observable<any> {
     const projectResourceRef = this.afStore
       .collection(`projects`)
@@ -129,14 +113,12 @@ export class ProjectService {
         });
     });
   }
-  //Edit Project service
   editProjectAllocation(payload: any): Observable<any> {
     const projectResourceRef = this.afStore
       .collection(`projects`)
       .doc(payload.projectId)
       .collection('resources');
     return Observable.create(observer => {
-      //console.log('Edit servive' + JSON.stringify(payload));
       projectResourceRef
         .doc(payload.id)
         .update(payload)
@@ -148,7 +130,6 @@ export class ProjectService {
         });
     });
   }
-  //Delete Project service
   deleteProjectAllocation(payload: any): Observable<any> {
     const projectResourceRef = this.afStore
       .collection(`projects`)

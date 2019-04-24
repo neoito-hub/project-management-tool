@@ -91,7 +91,6 @@ export class ProjectDetailContainerComponent implements OnInit {
     });
   }
   uploadDoc(args: any) {
-    console.log('argsss=>', args);
     const initialState = {
       title: 'Upload your files here',
       projectID: args
@@ -142,14 +141,11 @@ export class ProjectDetailContainerComponent implements OnInit {
     this.bsModalRef = this.modalService.show(template);
   }
   deleteLink(args: any) {
-    console.log('delete-->args', args);
     if (window.confirm('Do you really want to Delete?')) {
       let delDoc = this.projectDocuments.filter(v => v.url != args.url);
-      console.log('delDoc', delDoc);
       this.projectservice.addDocuments(delDoc, this.id).subscribe(
         v => {
           if (v) {
-            console.log('v2', v);
             let storageRef = firebase.storage().ref();
             storageRef
               .child(`${args.firebasename}`)

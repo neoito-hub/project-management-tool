@@ -86,16 +86,13 @@ export class FileUploadComponent {
     // The storage path
     const randName = randomString();
     const path = `Documents/${this.projectID}/${randName}_${this.file.name}`;
-    console.log('path', path);
     // Totally optional metadata
     // const customMetadata = { app: 'My AngularFire-powered PWA!' };
     // console.log('customMetadata', customMetadata);
     // The main task
     this.task = this.storage.upload(path, this.file);
-    console.log('task', this.task);
     // Progress monitoring
     this.percentage = this.task.percentageChanges();
-    console.log('percentage', this.percentage);
 
     // The file's download URL
     const fileRef = this.storage.ref(path);
@@ -120,7 +117,6 @@ export class FileUploadComponent {
                   .subscribe(
                     v => {
                       if (v) {
-                        console.log(v);
                         this.bsModalRef.hide();
                       }
                     },

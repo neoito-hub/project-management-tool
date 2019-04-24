@@ -16,6 +16,9 @@ export * from './add-resource-allocation.effects';
 export * from './edit-resource-allocation.effects';
 export * from './deleteresource-allocation.effects';
 
+// All the effects can be exported from the index to be used
+// in the core module feature effects declaration
+
 export const ProjectEffects = [
   LoadProjectEffects,
   AddProjectEffects,

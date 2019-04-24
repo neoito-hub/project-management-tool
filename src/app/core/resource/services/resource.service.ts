@@ -7,11 +7,8 @@ export class ResourceService {
   constructor(private firestore: AngularFirestore) {}
 
   getResourceList(): any {
-    //console.log('in service');
-
     return this.firestore
       .collection('resourcesList', ref => {
-        //console.log(ref, 'reference');
         return ref;
       })
       .valueChanges();
@@ -40,8 +37,6 @@ export class ResourceService {
   }
 
   getResource(payload: any): Observable<any> {
-    // console.log('payload =>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', payload);
-
     return this.firestore
       .collection('resourcesList')
       .doc(payload)
@@ -49,7 +44,6 @@ export class ResourceService {
   }
 
   editResource(payload: any): Observable<any> {
-    console.log('in resource edit service', payload.data);
     const resourceRef = this.firestore.collection('resourcesList');
     return Observable.create(observer => {
       resourceRef
@@ -65,7 +59,6 @@ export class ResourceService {
   }
 
   deleteResource(payload: any): Observable<any> {
-    console.log('delete meeeeeeeeeeeeeeeeeeeee', payload.id);
     const resourceRef = this.firestore.collection('resourcesList');
     return Observable.create(observer => {
       resourceRef
