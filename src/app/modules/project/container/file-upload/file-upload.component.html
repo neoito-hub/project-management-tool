@@ -16,6 +16,13 @@
     placeholder="Type a filename"
     (input)="namechanged($event.target.value)"
   />
+
+  <input
+    type="date"
+    class="form-control mb-1"
+    placeholder="Valid Upto"
+    (input)="datechanged($event.target.value)"
+  />
   <div
     class="dropzone"
     dropZone

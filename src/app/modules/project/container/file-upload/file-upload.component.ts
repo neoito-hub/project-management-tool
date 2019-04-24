@@ -20,6 +20,7 @@ import { randomString } from '../../../../shared/utils';
 })
 export class FileUploadComponent {
   name: string;
+  date: string;
   title: string;
   projectID: string;
   closeBtnName: string;
@@ -113,6 +114,7 @@ export class FileUploadComponent {
               if (this.docUrl && this.name && this.projectID) {
                 let obj = {
                   name: this.name,
+                  date: this.date,
                   url: this.docUrl,
                   firebasename: path
                 };
@@ -139,6 +141,9 @@ export class FileUploadComponent {
   }
   namechanged(args: any) {
     this.name = args;
+  }
+  datechanged(args: any) {
+    this.date = args;
   }
 
   // Determines if the upload task is active
