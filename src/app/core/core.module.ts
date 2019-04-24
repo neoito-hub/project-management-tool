@@ -7,7 +7,7 @@ import { reducers } from './root-reducer/index';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthService } from './auth/services/auth.service';
 import { AuthEffects } from './auth/effects/auth.effects';
-import { ResourceEffect } from './resource/effects/resource.effect';
+import { ResourceEffect } from './resource/effects';
 import { ResourceService } from './resource/services';
 import { ProjectService } from './project/services';
 import { ProjectEffects } from './project';
@@ -16,7 +16,7 @@ import { ProjectEffects } from './project';
   imports: [
     CommonModule,
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([AuthEffects, ResourceEffect, ...ProjectEffects]),
+    EffectsModule.forRoot([AuthEffects, ...ResourceEffect, ...ProjectEffects]),
     StoreDevtoolsModule.instrument({})
   ],
   declarations: [],
