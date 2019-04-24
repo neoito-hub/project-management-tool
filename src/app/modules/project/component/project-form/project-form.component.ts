@@ -3,21 +3,16 @@ import {
   countries as listCountries,
   projectStatusList
 } from '../../../../shared/const-values';
-import {
-  FormGroup,
-  FormControl,
-  FormBuilder,
-  Validators
-} from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Project } from 'src/app/core/project/models';
 
 @Component({
-  selector: 'app-project-add',
-  templateUrl: './project-add.component.html',
-  styleUrls: ['./project-add.component.scss']
+  selector: 'app-project-form',
+  templateUrl: './project-form.component.html',
+  styleUrls: ['./project-form.component.scss']
 })
-export class ProjectAddComponent implements OnInit {
+export class ProjectFormComponent implements OnInit {
   myForm;
   @Input()
   isEdit: boolean;
@@ -33,18 +28,7 @@ export class ProjectAddComponent implements OnInit {
   value;
   submitFlag: boolean;
 
-  constructor(private _fb: FormBuilder, private router: Router) {
-    // this.myForm = this._fb.group({
-    //   projectId: '',
-    //   projectName: ['', [Validators.required]],
-    //   clientName: ['', [Validators.required]],
-    //   country: ['', [Validators.required]],
-    //   email: ['', [Validators.required, Validators.email]],
-    //   skypeId: ['', [Validators.required]],
-    //   startDate: ['', [Validators.required]],
-    //   status: ['', [Validators.required]]
-    // });
-  }
+  constructor(private _fb: FormBuilder, private router: Router) {}
 
   ngOnInit() {
     if (!this.isEdit) {
@@ -79,29 +63,7 @@ export class ProjectAddComponent implements OnInit {
     });
   }
 
-  // formatToTimestamp(formDate: string): any {
-  //   console.log(formDate);
-  //   let myDate = formDate.split('-');
-  //   let newDate = myDate[0] + '/' + myDate[1] + '/' + myDate[2];
-  //   console.log(myDate);
-  //   return new Date(newDate).getTime();
-  // }
-  // formatToDate(date) {
-  //   var d = new Date(date),
-  //     month = '' + (d.getMonth() + 1),
-  //     day = '' + d.getDate(),
-  //     year = d.getFullYear();
-
-  //   if (month.length < 2) month = '0' + month;
-  //   if (day.length < 2) day = '0' + day;
-
-  //   return [year, month, day].join('-');
-  // }
   onSubmit() {
-    //this.value = this.myForm.value;
-    //let formDate = this.value.startDate;
-    //let timestamp = this.formatToTimestamp(formDate);
-    //this.myForm.patchValue({ startDate: timestamp });
     this.submitFlag = true;
     this.value = this.myForm.value;
     if (this.myForm.valid) {

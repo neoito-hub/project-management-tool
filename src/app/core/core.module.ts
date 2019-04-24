@@ -17,9 +17,7 @@ import { ProjectEffects } from './project';
     CommonModule,
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot([AuthEffects, ResourceEffect, ...ProjectEffects]),
-    StoreDevtoolsModule.instrument({
-      maxAge: 5
-    })
+    StoreDevtoolsModule.instrument({})
   ],
   declarations: [],
   providers: [AuthService, ResourceService, ProjectService]

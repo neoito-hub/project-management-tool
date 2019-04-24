@@ -54,7 +54,6 @@ export class FileUploadComponent {
     this.project$.subscribe((v: any) => {
       if (v) {
         this.documents = v;
-        console.log('our documents', this.documents);
       }
     });
   }
@@ -64,7 +63,6 @@ export class FileUploadComponent {
   }
   startUpload(event: any) {
     this.file = event.item(0);
-    console.log('file ->>>', this.file);
     if (!this.file) {
       console.log('no file choosen');
       return;
@@ -109,8 +107,6 @@ export class FileUploadComponent {
           this.downloadURL.subscribe(res => {
             if (res) {
               this.docUrl = res;
-              console.log('docUrl ', this.docUrl);
-              console.log('data->>>', this.docUrl, this.name);
               if (this.docUrl && this.name && this.projectID) {
                 let obj = {
                   name: this.name,

@@ -46,28 +46,16 @@ export class ProjectDetailContainerComponent implements OnInit {
   }
   ngOnInit() {
     this.id = this.router.snapshot.paramMap.get('id');
-    // this.resourceStore.dispatch(new Resource.LoadResourceAction());
     this.projectStore.dispatch(new Project.FindProject(this.id));
     this.projectStore.dispatch(new Project.GetProjectResources(this.id));
-    // this.$projectResourceList = this.resourceStore.select(
-    //   Resource.getAllResources
-    // );
-    // this.$projectResourceList.subscribe(v => {
-    //   if (v) {
-    //     console.log(v);
-    //     this.projectResourceList = v;
-    //   }
-    // });
     this.$projectdata = this.projectStore.select(Project.getProjectSelected);
     this.$projectdata.subscribe(v => {
       if (v) {
         this.projectdata = v;
         if (v.documents) {
           this.projectDocuments = v.documents;
-          console.log('project documents', this.projectDocuments);
         } else {
           this.projectDocuments = [];
-          //console.log('project documents', this.projectDocuments);
         }
       }
     });
@@ -93,14 +81,11 @@ export class ProjectDetailContainerComponent implements OnInit {
   }
   populateResourceDropdown() {
     this.resourceService.getResourceList().subscribe(data => {
-      //this.projectResourceList = data;
       let allocatedData = this.projectResourcedata;
       let excludeIds = allocatedData.map(data => {
         return data.resourceId;
       });
-      //console.log('excl', excludeIds);
       this.projectResourceList = data.filter(item => {
-        //console.log('item', item);
         return excludeIds.indexOf(item.resourceId) == -1;
       });
     });
@@ -122,7 +107,6 @@ export class ProjectDetailContainerComponent implements OnInit {
       alert('Validation Error');
     } else {
       if (!this.isEdit) {
-        //console.log(this.myForm.value);
         this.projectStore.dispatch(
           new Project.AddResourceAllocationAction(this.myForm.value)
         );
@@ -133,14 +117,10 @@ export class ProjectDetailContainerComponent implements OnInit {
           new Project.EditResourceAllocationAction(this.myForm.value)
         );
         this.bsModalRef.hide();
-        //this.modalService.hide();
       }
     }
-
-    //console.log(this.myForm.value);
   }
   onChangeResource(id) {
-    //alert(`selected is ${id}`);
     this.resourceService.getResourceList().subscribe(data => {
       if (data) {
         let res = data.find(res => res.resourceId == id);

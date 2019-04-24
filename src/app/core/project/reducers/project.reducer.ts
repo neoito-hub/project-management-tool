@@ -212,7 +212,7 @@ export function ProjectReducer(
       };
     }
     default:
-      return { ...state };
+      return state;
   }
 }
 export const getProjects = (state: ProjectState) => state.projectList;
