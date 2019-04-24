@@ -7,20 +7,17 @@ import { ResourceAddContainerComponent } from './containers/resource-add/resourc
 const routes: Routes = [
   // { path: '', redirectTo: 'resource-list', pathMatch: 'full' },
   {
-    path: 'resource-list',
-    component: ResourceListContainerComponent,
-    canActivate: [AuthGuard]
+    path: '',
+    component: ResourceListContainerComponent
   },
 
   {
-    path: 'resource-add',
-    component: ResourceAddContainerComponent,
-    canActivate: [AuthGuard]
+    path: 'add',
+    component: ResourceAddContainerComponent
   },
   {
-    path: 'resource-edit/:id',
-    component: ResourceAddContainerComponent,
-    canActivate: [AuthGuard]
+    path: 'edit/:id',
+    component: ResourceAddContainerComponent
   }
 ];
 
@@ -28,4 +25,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ResourcesRoutingModule {}
+export class ResourceRoutingModule {}

@@ -1,6 +1,7 @@
 <h3>Project List</h3>
 <table>
   <tr>
+    <th>Sl. No</th>
     <th>Project Name</th>
     <th>client</th>
     <th>Country</th>
@@ -10,7 +11,8 @@
     <th>Start Date</th>
     <th>Actions</th>
   </tr>
-  <tr *ngFor="let project of projects">
+  <tr *ngFor="let project of projects; let i = index">
+    <td>{{ i + 1 }}</td>
     <td>{{ project?.projectName }}</td>
     <td>{{ project?.clientName }}</td>
     <td>{{ project?.country }}</td>

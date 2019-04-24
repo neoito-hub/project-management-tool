@@ -16,7 +16,7 @@ import { ProjectEffects } from './project';
   imports: [
     CommonModule,
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([AuthEffects, ResourceEffect, ProjectEffects]),
+    EffectsModule.forRoot([AuthEffects, ResourceEffect, ...ProjectEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 5
     })

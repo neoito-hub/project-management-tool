@@ -1,27 +1,29 @@
 <h3>Resource List</h3>
 <table>
   <tr>
-    <th>Bitbucket</th>
+    <th>Sl. No</th>
+    <th>Name</th>
     <th>Email</th>
-    <th>Gxperience</th>
+    <th>Experience</th>
+    <th>Bitbucket</th>
     <th>Github</th>
     <th>Gitlab</th>
-    <th>Name</th>
     <th>Upwork</th>
     <th>Actions</th>
   </tr>
-  <tr *ngFor="let resource of resources">
-    <td>{{ resource?.bitbucket }}</td>
+  <tr *ngFor="let resource of resources; let i = index">
+    <td>{{ i + 1 }}</td>
+    <td>{{ resource?.name }}</td>
     <td>{{ resource?.email }}</td>
-    <td>{{ resource?.experience }}</td>
+    <td>{{ resource?.experience }} Year</td>
+    <td>{{ resource?.bitbucket }}</td>
     <td>{{ resource?.github }}</td>
     <td>{{ resource?.gitlab }}</td>
-    <td>{{ resource?.name }}</td>
     <td>{{ resource?.upwork }}</td>
     <div class="btn-group btn-block">
       <button
         class="btn btn-sm btn-primary"
-        [routerLink]="['/resource-edit/' + resource?.resourceId]"
+        [routerLink]="['/resources/edit/' + resource?.resourceId]"
         (click)="clickEdit()"
       >
         Edit

@@ -2,14 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ReactiveFormsModule } from '@angular/forms';
-import { ResourcesRoutingModule } from './resources.routing';
+import { ResourceRoutingModule } from './resource.routing';
 import { ResourceAddComponent } from './components/resource-add/resource-add.component';
 import { ResourceListComponent } from './components/resource-list/resource-list.component';
 import { ResourceAddContainerComponent } from './containers/resource-add/resource-add.component';
 import { ResourceListContainerComponent } from './containers/resource-list/resource-list.component';
 
 @NgModule({
-  imports: [CommonModule, ResourcesRoutingModule, ReactiveFormsModule],
+  imports: [CommonModule, ResourceRoutingModule, ReactiveFormsModule],
   declarations: [
     ResourceAddComponent,
     ResourceListComponent,
@@ -17,4 +17,4 @@ import { ResourceListContainerComponent } from './containers/resource-list/resou
     ResourceListContainerComponent
   ]
 })
-export class ResourcesModule {}
+export class ResourceModule {}

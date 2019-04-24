@@ -3,7 +3,11 @@
   (delete)="onClickDelete($event)"
 ></app-resourcelist>
 <div class="fixed-bottom">
-  <button class="btn-fab" [routerLink]="['/resource-add']" (click)="clickAdd()">
+  <button
+    class="btn-fab"
+    [routerLink]="['/resources/add']"
+    (click)="clickAdd()"
+  >
     <!-- <i class="fa fa-plus" aria-hidden="true"></i> -->
 
     <img class="plus-button " src="assets/images/ic_add_white_18dp_1x.png" />

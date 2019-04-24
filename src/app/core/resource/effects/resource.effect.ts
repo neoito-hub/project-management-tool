@@ -48,7 +48,7 @@ export class ResourceEffect {
           return new fromActions.AddResourceActionSuccess(data);
         }),
         tap(() => {
-          this.router.navigate(['/resource-list']);
+          this.router.navigate(['/resources']);
         }),
         catchError(error => {
           //console.log(error);
@@ -85,7 +85,7 @@ export class ResourceEffect {
           return new fromActions.UpdateResourceActionSuccess(data);
         }),
         tap(() => {
-          this.router.navigate(['/resource-list']);
+          this.router.navigate(['/resources']);
         }),
         catchError(error => {
           //console.log(error);

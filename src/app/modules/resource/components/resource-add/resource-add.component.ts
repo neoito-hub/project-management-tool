@@ -82,7 +82,7 @@ export class ResourceAddComponent implements OnInit {
   }
 
   cancel() {
-    this.router.navigate(['resource-list']);
+    this.router.navigate(['resources']);
   }
 
   get f() {

@@ -1,4 +1,5 @@
-import * as fromProjectActions from '../actions/project.action';
+import * as fromProjectActions from '../actions';
+import { ProjectAction } from '../actions';
 import { Project } from '../models/project.model';
 
 export interface ProjectState {
