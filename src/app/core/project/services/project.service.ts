@@ -19,7 +19,7 @@ export class ProjectService {
   loadProjects(): Observable<any> {
     return this.afStore
       .collection('/projects', ref => {
-        return ref;
+        return ref.orderBy('status');
       })
       .valueChanges();
   }
