@@ -11,15 +11,22 @@ import { ResourceEffect } from './resource/effects';
 import { ResourceService } from './resource/services';
 import { ProjectService } from './project/services';
 import { ProjectEffects } from './project';
+import { UserEffect } from './user';
+import { UserService } from './user/services';
 
 @NgModule({
   imports: [
     CommonModule,
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([AuthEffects, ...ResourceEffect, ...ProjectEffects]),
+    EffectsModule.forRoot([
+      AuthEffects,
+      ...ResourceEffect,
+      ...ProjectEffects,
+      ...UserEffect
+    ]),
     StoreDevtoolsModule.instrument({})
   ],
   declarations: [],
-  providers: [AuthService, ResourceService, ProjectService]
+  providers: [AuthService, ResourceService, ProjectService, UserService]
 })
 export class CoreModule {}

@@ -15,6 +15,7 @@ import { DropZoneDirective } from './drop-zone.directive';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { FileSizePipe } from './shared/file-size.pipe';
 import { SidebarComponent } from './modules/layout/sidebar/sidebar.component';
+import { UserModule } from './modules/user/user.module';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { SidebarComponent } from './modules/layout/sidebar/sidebar.component';
     AngularFireAuthModule,
     AuthModule,
     CoreModule,
+    UserModule,
     AngularFireStorageModule
   ],
   providers: [AuthGuardService, AngularFireDatabase],

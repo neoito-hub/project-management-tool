@@ -1,0 +1,42 @@
+<h3>Users List</h3>
+<table>
+  <tr>
+    <th>Sl. No</th>
+    <th>UserId</th>
+    <th>Email</th>
+    <th>User Type</th>
+    <th>Action</th>
+  </tr>
+  <tr *ngFor="let user of (users$ | async); let i = index">
+    <td>{{ i + 1 }}</td>
+    <td>{{ user?.userId }}</td>
+    <td>{{ user?.email }}</td>
+    <td>{{ user?.role }}</td>
+    <td>
+      <div class="btn-group btn-block">
+        <button
+          class="btn btn-success"
+          [routerLink]="['/users/edit', user.userId]"
+        >
+          Edit
+        </button>
+
+        <button
+          class="btn btn-primary"
+          [routerLink]="['/users/detail/' + user?.userId]"
+          style="background-color:blue"
+        >
+          Details
+        </button>
+      </div>
+    </td>
+  </tr>
+</table>
+
+<div class="fixed-bottom">
+  <button class="btn-fab" [routerLink]="['/users/add']">
+    <!-- <i class="fa fa-plus" aria-hidden="true"></i> -->
+
+    <img class="plus-button " src="assets/images/ic_add_white_18dp_1x.png" />
+  </button>
+</div>
