@@ -1,3 +1,51 @@
-<p>
-  user-form works!
-</p>
+<h3><span *ngIf="isEdit">Edit</span><span *ngIf="!isEdit">Add</span> User</h3>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <form [formGroup]="myForm" (ngSubmit)="onSubmitUser()">
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" formControlName="email" class="form-control" />
+          <span class="text-danger" *ngIf="submitFlag && f.email.errors"
+            >*required feild <br
+          /></span>
+
+          <label>Role</label>
+          <select class="form-control" id="role" formControlName="role">
+            <option *ngFor="let role of roles" [value]="role.roleCode">{{
+              role.role
+            }}</option>
+          </select>
+          <span class="text-danger" *ngIf="submitFlag && f.role.errors"
+            >*required feild <br
+          /></span>
+
+          <button
+            type="submit"
+            class="btn btn-primary"
+            style="margin-top: 10px;"
+            *ngIf="!isEdit"
+          >
+            Add User
+          </button>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            style="margin-top: 10px;"
+            *ngIf="isEdit"
+          >
+            Edit User
+          </button>
+          <button
+            (click)="onCancel()"
+            class="btn btn-primary"
+            style="    margin-left: 19px;
+            margin-top: 10px;"
+          >
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

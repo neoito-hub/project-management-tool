@@ -38,7 +38,7 @@ export const getSelectedUsers = createSelector(
   }
 );
 
-export const getSelectedUsers1 = createSelector(
+export const getSelectedUser = createSelector(
   getUserState,
   fromReducer.getUserSelected
 );

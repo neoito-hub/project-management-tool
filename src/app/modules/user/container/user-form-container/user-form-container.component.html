@@ -1,3 +1,5 @@
-<p>
-  user-form-container works!
-</p>
+<app-user-form
+  (formValue)="onSubmitUser($event)"
+  [isEdit]="isEdit"
+  [user]="user"
+></app-user-form>

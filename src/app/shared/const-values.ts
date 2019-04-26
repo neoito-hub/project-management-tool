@@ -250,3 +250,7 @@ export const projectStatusList = [
   { statusCode: '2', status: 'Completed' },
   { statusCode: '3', status: 'Closed' }
 ];
+export const userRoles = [
+  { roleCode: '0', role: 'Super User' },
+  { roleCode: '1', role: 'User' }
+];

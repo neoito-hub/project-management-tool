@@ -27,14 +27,13 @@ export class UpdateUserEffect {
     switchMap((action: fromActions.UpdateUserAction) => {
       return this._resourceService.editUser(action.payload).pipe(
         map(data => {
-          //console.log('data in our edit effect', data);
           return new fromActions.UpdateUserActionSuccess(data);
         }),
         tap(() => {
-          this.router.navigate(['/resources']);
+          this.router.navigate(['/users']);
         }),
         catchError(error => {
-          //console.log(error);
+          console.log(error);
           return of(new fromActions.UpdateUserActionError());
         })
       );
