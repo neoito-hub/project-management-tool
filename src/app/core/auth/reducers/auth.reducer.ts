@@ -1,4 +1,4 @@
-import * as fromAuthActions from '../actions/auth.action';
+import * as fromAuthActions from '../actions';
 
 export interface AuthState {
   loggedIn: boolean;

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { LOGIN_SUBMIT } from 'src/app/core/auth/actions/auth.action';
+import { LOGIN_SUBMIT } from 'src/app/core/auth/actions';
 
 @Component({
   selector: 'app-login',

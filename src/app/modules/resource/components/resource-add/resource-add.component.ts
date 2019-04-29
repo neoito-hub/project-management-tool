@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { LOGOUT_SUBMIT } from 'src/app/core/auth/actions/auth.action';
+import { LOGOUT_SUBMIT } from 'src/app/core/auth/actions/auth-logout.action';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as Resource from '../../../../core/resource';

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { LOGOUT_SUBMIT } from 'src/app/core/auth/actions/auth.action';
+import { LOGOUT_SUBMIT } from 'src/app/core/auth/actions/auth-logout.action';
 import { Router } from '@angular/router';
 
 @Component({
