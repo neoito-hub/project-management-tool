@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 
 import { UserService } from '../services';
 
+import * as fromAuth from '../../auth';
+
 @Injectable()
 export class AddUserEffect {
   promoData: any;
@@ -27,7 +29,10 @@ export class AddUserEffect {
     switchMap((action: fromActions.AddUserAction) => {
       return this._userService.addUser(action.payload).pipe(
         map(data => {
-          return new fromActions.AddUserActionSuccess(data);
+          return (
+            new fromActions.AddUserActionSuccess(data),
+            new fromAuth.RegisterSubmit(action.payload)
+          );
         }),
         tap(() => {
           this.router.navigate(['/users']);

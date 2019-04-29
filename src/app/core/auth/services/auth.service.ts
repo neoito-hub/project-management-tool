@@ -59,4 +59,13 @@ export class AuthService {
     //console.log(`Firebase response: ${result}`);
     return result;
   }
+
+  //Register New User
+  doRegister(value): Observable<auth.UserCredential> {
+    let email = value.email;
+    let password = 'password';
+    return from(
+      this.afAuth.auth.createUserWithEmailAndPassword(email, password)
+    );
+  }
 }

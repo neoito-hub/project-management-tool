@@ -44,6 +44,26 @@ export function AuthReducer(
         data: [{ Message: 'Logged out successfully' }]
       };
     }
+    case fromAuthActions.REGISTER_SUBMIT: {
+      return {
+        ...state,
+        data: [{ Message: 'Attemting Register' }]
+      };
+    }
+
+    case fromAuthActions.REGISTER_SUCCESS: {
+      return {
+        ...state,
+        data: [{ Message: 'User Registered Successfully' }]
+      };
+    }
+
+    case fromAuthActions.REGISTER_FAIL: {
+      return {
+        ...state,
+        data: [{ Message: 'User Registration Failed' }]
+      };
+    }
     default:
       return { ...state };
   }
