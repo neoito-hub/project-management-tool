@@ -25,6 +25,7 @@ export class RegisterEffects {
       return this.fromAuthServices.doRegister(action.payload).pipe(
         map(data => {
           //console.log(data);
+          this.fromAuthServices.sentResetPasswordEmail(data.user.email);
           this.router.navigate(['users']);
           return new fromAuthActions.RegisterSuccess(data);
         }),

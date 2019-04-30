@@ -68,4 +68,16 @@ export class AuthService {
       this.afAuth.auth.createUserWithEmailAndPassword(email, password)
     );
   }
+
+  //password Reset Email
+  sentResetPasswordEmail(emailAddress: string) {
+    this.afAuth.auth
+      .sendPasswordResetEmail(emailAddress)
+      .then(function() {
+        console.log('reset email sent');
+      })
+      .catch(function(error) {
+        console.error(error);
+      });
+  }
 }
