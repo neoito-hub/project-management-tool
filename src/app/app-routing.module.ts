@@ -7,17 +7,17 @@ const routes: Routes = [
 
   {
     path: 'projects',
-    loadChildren: './modules/project/project.module#ProjectModule',
+    loadChildren: () => import('./modules/project/project.module').then(m => m.ProjectModule),
     canActivate: [AuthGuardService]
   },
   {
     path: 'resources',
-    loadChildren: './modules/resource/resource.module#ResourceModule',
+    loadChildren: () => import('./modules/resource/resource.module').then(m => m.ResourceModule),
     canActivate: [AuthGuardService]
   },
   {
     path: 'users',
-    loadChildren: './modules/user/user.module#UserModule',
+    loadChildren: () => import('./modules/user/user.module').then(m => m.UserModule),
     canActivate: [AuthGuardService]
   }
 ];
